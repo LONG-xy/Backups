@@ -1,0 +1,142 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register Src="UserControl/InfoSearch.ascx" TagName="InfoSearch" TagPrefix="uc2" %>
+<html>
+<head runat="server">
+    <title>无标题页</title>
+    <script type="text/javascript" src="Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/master.css" rel="stylesheet" type="text/css" />
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+            <div class="row custom-header">
+                <div class="col-sm-6 col-md-6 custom-header-col">
+                    <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/infoadd.aspx">发布信息</asp:HyperLink>                    
+                    <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Login.aspx">进入后台</asp:HyperLink>
+                    <a href="#">设为首页</a>
+                    <a href="mailto:ABC***@1**.COM">联系我们</a>
+                </div>
+            </div>
+            <div class="row custom-nav">
+                <div class="col-sm-12 col-md-12 custom-header-nav">
+                    <div class="col-sm-3 col-md-3 text-right"><img src="../images/newImg/logo.png" class="custom-header-logo"/></div>
+                    <div class="col-sm-9 col-md-9">
+                        <div class="row">    
+                            <div class="col-sm-12 col-md-12 custom-header-nav-box">
+                                <ul class="nav nav-pills nav-justified custom-header-nav-1">
+                                    <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">首　　页</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ShowPage/webZP.aspx">招聘信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/ShowPage/webGY.aspx">公寓信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/ShowPage/webWPQG.aspx">物品求购</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/ShowPage/webQDCD.aspx">求兑出兑</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/ShowPage/webXQHZ.aspx">寻求合作</asp:HyperLink></li>
+                                </ul>
+                            </div> 
+                        </div> 
+                        <div class="row">    
+                            <div class="col-sm-12 col-md-12 custom-header-nav-box">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/ShowPage/webPX.aspx">培训信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/ShowPage/webQZ.aspx">求职信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/ShowPage/webJJ.aspx">家教信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/ShowPage/webWPCS.aspx">物品出售</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/ShowPage/webCL.aspx">车辆信息</asp:HyperLink></li>
+                                    <li><asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/ShowPage/webQYGG.aspx">企业广告</asp:HyperLink></li>
+                                </ul>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-show-image">
+                <div class="col-sm-12 col-md-12">
+                    <img src="../images/newImg/pcard1.png"/>
+                </div>
+            </div>
+            <div class="row custom-content">
+                <div class="col-sm-4 col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="custom-content-calendar-box">
+                                <div class="custom-left-title"><img src="../images/newImg/fk.png"/> 日历</div>
+                                <asp:Calendar ID="Calendar1" CssClass="custom-calendar" runat="server" BackColor="#FFFFCC" BorderColor="#FFCC66" BorderWidth="1px" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#663399" Height="209px" ShowGridLines="True" Width="270px">
+                                    <DayHeaderStyle BackColor="#FFCC66" Font-Bold="True" Height="1px" />
+                                    <NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC" />
+                                    <OtherMonthDayStyle ForeColor="#CC9966" />
+                                    <SelectedDayStyle BackColor="#CCCCFF" Font-Bold="True" />
+                                    <SelectorStyle BackColor="#FFCC66" />
+                                    <TitleStyle BackColor="#990000" Font-Bold="True" Font-Size="9pt" ForeColor="#FFFFCC" />
+                                    <TodayDayStyle BackColor="#FFCC66" ForeColor="White" />
+                                </asp:Calendar>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row custom-content-search">
+                        <div class="col-sm-12 col-md-12">
+                            <uc2:InfoSearch ID="InfoSearch1" runat="server" />
+                        </div>
+                    </div>
+                    <div class="row custom-content-lx">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="custom-content-lx-box">
+                                <div class="custom-left-title"><img src="../images/newImg/fk.png"/> 联系我们</div>
+                                <p>吉林省***科技有限公司</p>
+                                <p>联系地址：****市东*大街亚****广</p>
+                                <p>场座2205室</p>
+                                <p>联系电话：885**86 88**4275</p>
+                                <p>邮政编码：1**000</p>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <div class="row custom-bottom">
+                <div class="col-sm-12 col-md-12 custom-bottom-msg text-center">
+                    公司网址：www.mingri**ft.com 联系电:87****1287&nbsp; 96454**13
+                    吉林省**科技有限公司 版权所有 &nbsp;&nbsp;
+                </div>
+            </div>
+    </form>
+
+    <div class="modal fade" id="showLeaguer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+		    <div class="modal-content">
+			    <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" 
+						    aria-hidden="true">×
+				    </button>
+				    <h4 class="modal-title" id="myModalLabel">
+					    详情
+				    </h4>
+			    </div>
+			    <div class="modal-body">				    
+                    <iframe id="iframeShow" width="550" height="300" style="border:0px;background-color:white;" scrolling="no"></iframe>
+			    </div>
+			    <div class="modal-footer">
+				    <button type="button" class="btn btn-default" 
+						    data-dismiss="modal">关闭
+				    </button>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+    <script>
+        function SetID(ItemID) {
+            $("#iframeShow").prop("src", "ShowLeaguerInfo.aspx?id=" + ItemID);
+        }
+        $(function () {
+            $('#showLeaguer').modal({
+                keyboard: true,
+                show:false
+        })});
+    </script>
+</body>
+</html>

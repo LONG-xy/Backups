@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Common_MasterPage"%>
+<%@ Register Src="CallBoard.ascx" TagName="CallBoard" TagPrefix="uc3" %>
+<%@ Register Src="Link.ascx" TagName="Link" TagPrefix="uc4" %>
+<%@ Register Src="ToolsSort.ascx" TagName="ToolsSort" TagPrefix="uc5" %>
+<%@ Register Src="MendSort.ascx" TagName="MendSort" TagPrefix="uc6" %>
+<%@ Register Src="HotNews.ascx" TagName="HotNews" TagPrefix="uc2" %>
+<%@ Register Src="Login.ascx" TagName="Login" TagPrefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>企业门户网</title>
+    <link href="../CSS.css" rel="stylesheet" type="text/css" />
+    <style>
+    body{ background-color: #999999;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;}
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <table width="980" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="79" valign="top" bgcolor="#FFFFFF"><table width="980" height="76" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="18" colspan="3"></td>
+        <td width="292" rowspan="3" valign="top"><table width="275" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="13" height="43" rowspan="2"><img src="../images/1_0.gif" width="5" height="43" /></td>
+            <td width="66" align="left" valign="top">&nbsp;</td>
+            <td width="12" height="43" rowspan="2" align="left"><img src="../images/1_0.gif" width="5" height="43" /></td>
+            <td width="65" align="left">&nbsp;</td>
+            <td width="10" height="43" rowspan="2" align="left"><img src="../images/1_0.gif" width="5" height="43" /></td>
+            <td width="110" align="left">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="left" valign="bottom"><a href="javascript:window.external.AddFavorite('http://www.mingribook.com', '吉林省明日科技有限公司')" class="daohanglianjie">收藏本站</a></td>
+            <td align="left" valign="bottom"><a href="#" class="daohanglianjie"><span  onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.mingribook.com');"  style="CURSOR: hand">设置主页</span></a></td>
+            <td align="left" valign="bottom"><a href="mailto:mingrisoft@mingrisoft.com" class="daohanglianjie">联系我们</a></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td width="44"></td>
+        <td width="269" height="45"><img src="../images/biao.gif" width="269" height="45" /></td>
+        <td width="375"></td>
+      </tr>
+      <tr>
+        <td colspan="4"></td>
+        </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="32" bgcolor="#397FBB"><table width="980" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td colspan="1"></td>
+      </tr>
+      <tr>
+        <td width="49">&nbsp;</td>
+        <td width="429" class="wenzi">欢迎您登录企业门户网站！愿您天天有份好心情！</td>
+        <td width="502">
+        <asp:Menu ID="Menu1" runat="server" BackColor="Transparent" DynamicHorizontalOffset="2"
+                        Font-Names="Verdana" Font-Size="9pt" ForeColor="White" Orientation="Horizontal"
+                        StaticSubMenuIndent="10px">
+                        <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                        <DynamicHoverStyle BackColor="#666666" ForeColor="White" />
+                        <DynamicMenuStyle BackColor="#E3EAEB" />
+                        <StaticSelectedStyle BackColor="#1C5E55" />
+                        <DynamicSelectedStyle BackColor="#1C5E55" />
+                        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" BackColor="#397FBB"/>
+                        <Items>
+                            <asp:MenuItem Text="首页" Value="首页" NavigateUrl="~/Default.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="产品展示" Value="产品展示">
+                                <asp:MenuItem Text="C#+ASP.NET" Value="C#+ASP.NET" NavigateUrl="~/User/Sort.aspx?PID=0"></asp:MenuItem>
+                                <asp:MenuItem Text="Java+JSP" Value="Java+JSP" NavigateUrl="~/User/Sort.aspx?PID=1"></asp:MenuItem>
+                                <asp:MenuItem Text="ASP+PHP" Value="ASP+PHP" NavigateUrl="~/User/Sort.aspx?PID=2"></asp:MenuItem>
+                                <asp:MenuItem Text="VC++" Value="VC++" NavigateUrl="~/User/Sort.aspx?PID=3"></asp:MenuItem>
+                                <asp:MenuItem Text="VB" Value="VB" NavigateUrl="~/User/Sort.aspx?PID=4"></asp:MenuItem>
+                                <asp:MenuItem Text="Delphi" Value="Delphi" NavigateUrl="~/User/Sort.aspx?PID=5"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="技术支持" Value="技术支持">
+                                <asp:MenuItem Text="工具软件下载" Value="工具软件下载" NavigateUrl="~/User/Sort.aspx?SortID=0"></asp:MenuItem>
+                                <asp:MenuItem Text="补丁下载" Value="补丁下载" NavigateUrl="~/User/Sort.aspx?SortID=1"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="招聘信息" Value="招聘信息" NavigateUrl="~/User/EngageInfo.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="留言簿" Value="留言簿" NavigateUrl="~/User/LeaveWord.aspx"></asp:MenuItem>
+                        </Items>
+                        <StaticHoverStyle BackColor="#666666" ForeColor="White"/>
+                    </asp:Menu></td>
+      </tr>
+      <tr>
+        <td colspan="1"></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="215" background="../images/banner.jpg"></td>
+  </tr>
+  <tr>
+    <td width="980" height="215" valign="top"><table width="980" height="716" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="192" valign="top"><uc1:Login ID="Login1" runat="server" />
+          <uc3:CallBoard ID="CallBoard1" runat="server" />
+          <uc4:Link ID="Link1" runat="server" /></td>
+        <td width="505" valign="top"><asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder></td>
+        <td width="328" valign="top"><uc2:HotNews ID="HotNews1" runat="server" />
+          <uc5:ToolsSort ID="ToolsSort1" runat="server" />
+          <uc6:MendSort ID="MendSort1" runat="server" /></td>
+      </tr>
+      <tr>
+        <td height="97" colspan="3" valign="top" background="../images/di.gif"><table width="980" height="77" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="13" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="215" rowspan="3">&nbsp;</td>
+            <td width="538" height="12" align="center"><span class="wenzi2">吉林省明日科技有限公司 版权所有</span> <br></td>
+            <td width="227" rowspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="25" align="center"><span class="wenzi2">客户服务中心热线直拨：0431-84978981  84978982</span><br></td>
+          </tr>
+          <tr>
+            <td align="center" class="wenzi2">CopyRight 2008  明日科技 <asp:HyperLink ID="hpLinkLogin" runat="server" NavigateUrl="~/Manager/Login.aspx"
+                        Target="_blank" Font-Underline="False" ForeColor="Black">后台登录</asp:HyperLink></td>
+          </tr>
+          <tr>
+            <td colspan="3">&nbsp;</td>
+          </tr>
+        </table></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+    </div>
+    </form>
+</body>
+</html>

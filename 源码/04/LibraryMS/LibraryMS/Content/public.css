@@ -1,0 +1,130 @@
+﻿.custom-col-header-left{
+    background-image:url('../images/headerLeft.jpg');
+    height:118px;
+    padding:0px;
+}
+.custom-col-header-center{     
+    height:118px;
+    padding:0px;
+}
+.custom-col-header-right{
+    background-image:url('../images/headerRight.jpg');
+    height:118px;
+    padding:0px;
+}
+.custom-col-header-center-content-left {
+    width:50%;
+    height:118px;
+    float:left;
+    background-image:url('../images/headerLeft.jpg');
+}
+.custom-col-header-center-content-right{
+    width:50%;
+    height:118px;
+    float:right;
+    background-image:url('../images/headerRight.jpg');
+}
+.custom-col-header-center-content {
+    width:777px;
+    margin:0px auto;
+    height:118px;
+    background-image:url('../images/index_02.gif');   
+    position:absolute;
+    top:0px;
+}
+
+.custom-col-menu-left {
+    height:47px;
+}
+.custom-col-menu-center {
+    height:47px;
+}
+.custom-col-menu-right {
+    height:47px;
+}
+.custom-col-menu-center-content-dateinfo {
+    height:47px;
+    font-family:'Microsoft YaHei';
+    font-size:13px;
+    font-weight:700;
+    color:#038d8d;
+}
+.custom-col-menu-center-content-dateinfo p {
+    margin: 2px 0 5px;
+}
+.custom-col-content {
+    margin-top:50px;
+}
+.custom-col-content-center {
+    width:777px;
+    margin:0px auto;
+}
+
+.custom-col-foot-left {
+    height:66px;
+    background-image:url('../images/footLeftAndRight.jpg');
+}
+.custom-col-foot-center {
+    background-image:url('../images/index_14.gif');
+    height:66px;
+}
+.custom-col-foot-right {
+    height:66px;
+    background-image:url('../images/footLeftAndRight.jpg');
+}
+
+.custom-col-content-img-s {    
+    width:756px;
+    height:45px;
+    margin:0px auto;
+}
+.custom-col-content-s {
+    width:756px;
+    margin:0px auto;
+    background-image:url('../images/tu shu pai hang2.gif');
+}
+.custom-col-content-s table th, .custom-col-content-s table td {
+    text-align:center;
+}
+.custom-col-foot-bg-s {
+     width:756px;
+     height:15px;
+     margin:0px auto;
+     background-image:url('../images/tu shu pai hang3.gif');
+}
+
+.custom-col-content-s-list {
+    width:756px;            
+    margin:0px auto;
+    padding-top:10px;
+}
+
+.s1,.s2 {
+    padding:16px 0 0 210px;
+}
+
+.row {
+    margin:30px 0px 30px 0px;
+}
+
+.custom-btn {
+    width:100px;
+    display:table-cell;
+}
+.custom-txt {
+    display:table-cell;
+}
+.container {
+    width:756px;
+}
+.custom-list-control>tbody>tr>td>input {
+    border:1px;
+    border-style:solid;
+    border-color:#bbbbbb;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+}
+.dropdown-menu {
+    z-index:10000;
+}

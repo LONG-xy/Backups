@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../css/css.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/PublicMethod.js"></script>
+    <style>
+        .div {
+            width: 100%;
+            clear: both;
+            height: 40px;
+        }
+    </style>
+    <script>
+        $(function () {
+            SelectType();
+            AddText();
+        });
+        //查询类型
+        function SelectType() {
+            var pd = { "t": "1", "Gid": "2" };
+            $.ajax({
+                type: "post",
+                url: "../Tools/Code.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.msg;//显示文本
+                            var values = item.code_id;//值
+                            $('#senceClass').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //添加信息
+        function AddText() {
+            var url = location.search;
+            var code = decodeURI(url.split('&')[0].replace("?t=", ""));
+            $('#seceCode').val(code);
+            var pd = { "t": "4", "code": code };
+            $.ajax({
+                type: "post",
+                url: "tools/Sence.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var time = new Date(data.addtime).getFullYear() + "-" + (new Date(data.addtime).getMonth() + 1) + "-" + new Date(data.addtime).getDate();
+                        $('#senceName').val(data.scene_name);
+                        $('#addTime').val(time);
+                        $('#status').val(data.state_code_id);
+                        $('#senceClass').val(data.scene_custom_id);
+                        $('#des').val(data.des);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //修改按钮
+        function UpdateBtn() {
+            var senceCode = $('#seceCode').val();
+            var scene_name = $('#senceName').val();
+            var addtime = $('#addTime').val();
+            var state_code_id = $('#status').val();
+            var scene_custom_id = $('#senceClass').val();
+            var des = $('#des').val();
+            var pd = { "t": "5", "senceCode": senceCode, "scene_name": scene_name, "addtime": addtime, "state_code_id": state_code_id, "scene_custom_id": scene_custom_id, "des": des };
+            $.ajax({
+                type: "post",
+                url: "tools/Sence.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var time = new Date(data.addtime).getFullYear() + "-" + (new Date(data.addtime).getMonth() + 1) + "-" + new Date(data.addtime).getDate();
+                        var userDes = $('#id_' + senceCode, parent.document);
+                        userDes.children("div").eq(2).html(scene_name);
+                        userDes.children("div").eq(3).html(addtime);
+                        userDes.children("div").eq(7).html($('#status').find("option:selected").text());
+                        userDes.children("div").eq(4).html($('#senceClass').find("option:selected").text());
+
+                        //关闭本窗体
+                        var close = $('#CloseCover', parent.document);
+                        $('#coverDiv', parent.document).remove();
+                        $(close).parent().parent().remove();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="height:70px;width:100%;background-color:#47515b;color:white;text-align:center;line-height:70px;font-size:22px;">管理修改</div>
+    <div style="width:300px; margin:50px auto;">
+        <div class="div"><div style="width:100px; float:left;">场景编号：</div><div style="float:left;"><input id="seceCode" type="text" readonly /></div></div>
+        <div class="div"><div style="width:100px; float:left;">场景名称：</div><div style="float:left;"><input id="senceName" type="text" /></div></div>
+        <div class="div"><div style="width:100px; float:left;">添加时间：</div><div style="float:left;"><input id="addTime" type="text" /></div></div>
+        <div class="div">
+            <div style="width:100px; float:left;">状态：</div><div style="float:left;">
+                <select id="status">
+                    <option value="0">正常</option>
+                    <option value="1">异常</option>
+                    <option value="99">关键词违规</option>
+                </select>
+            </div>
+        </div>
+        <div class="div">
+            <div style="width:100px; float:left;">类型：</div><div style="float:left;">
+                <select id="senceClass"></select>
+            </div>
+        </div>
+        <div class="div"><div style="width:100px; float:left;">详细说明：</div><div style="float:left;"><input id="des" type="text" /></div></div>
+
+        <div class="div" style="width:100px;margin:30px auto;">
+            <input type="button" style="width:120px; height:40px; background-color:#e4940e;border:none;color:white;" onclick="UpdateBtn()" value="修改" />
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+路由器0：
+Router>enable
+Router#show running config
+	
+Router#show running-config
+Building configuration...
+
+Current configuration : 444 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 192.168.3.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+ip route 192.168.2.0 255.255.255.0 192.168.3.2 
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+
+
+Router#  show running-config
+Building configuration...
+
+Current configuration : 444 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 192.168.3.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+ip route 192.168.2.0 255.255.255.0 192.168.3.2 
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+
+路由器1：
+Router>enable
+Router#show running-config
+Building configuration...
+
+Current configuration : 431 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.3.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 192.168.2.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 192.168.1.0 255.255.255.0 192.168.3.1 
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+
+
+Router#

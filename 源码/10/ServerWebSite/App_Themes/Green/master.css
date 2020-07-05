@@ -1,0 +1,90 @@
+﻿.top
+{
+    border-left: 1px solid #AEE899;
+    border-right: 1px solid #AEE899;
+    border-bottom: 1px solid #AEE899;
+    background-image: url("./images/topbgGreen.gif" );
+    height: 58px;
+}
+
+.logo
+{
+    background-image:url("./Images/logoGreen.gif");
+    background-position:left;
+    background-repeat:no-repeat;
+    height: 58px;
+}
+
+.top2
+{
+    background-image:url("./images/topbg2.gif"); 
+}
+.mainbg
+{
+    background-image: url("./images/mainbgGreen.gif" );
+    height: 230px;
+}
+.maintopbg
+{
+    background-image: url("./images/maintopbgGreen.gif" );
+    height: 24px;
+}
+.maintopleft
+{
+    background-image: url("./images/maintopleftGreen.gif" );
+    height: 23px;
+}
+.maintopright
+{
+    background-image: url("./images/maintoprightGreen.gif" );
+    height: 23px;
+}
+.maintoptab
+{
+    background-image: url("./images/miantoptabGreen.gif" );
+    height: 23px;
+}
+.mainbottom
+{
+    background-image: url("./images/mainbottomGreen.gif" );
+    height: 30px;
+}
+
+.jinxiaocun-index-lan0
+{
+    background-image: url("./images/jinxiaocun-index-lan0.gif" );
+    width: 987px;
+    height: 51px;
+}
+
+.jinxiaocun-index-lan02
+{
+    background-image: url("./images/jinxiaocun-index-lan02.gif" );
+    width: 630px;
+    height: 20px;
+}
+
+.jinxiaocun-index-lan03
+{
+    background-image: url("./images/jinxiaocun-index-lan03.gif" );
+}
+
+.jinxiaocun-index-lan04
+{
+    background-image: url("./images/jinxiaocun-index-lan04.gif" );
+    width: 40px;
+    height: 20px;
+}
+
+.jinxiaocun-index-lan05
+{
+    background-image: url("./images/jinxiaocun-index-lan05.gif" );
+    width: 987px;
+    height: 23px;
+}
+
+.masterPageBottom
+{
+    background-image: url("./images/Bottom.jpg" );
+    height:auto;
+}

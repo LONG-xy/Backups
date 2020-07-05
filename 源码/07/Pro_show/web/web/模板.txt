@@ -1,0 +1,12 @@
+﻿
+
+
+
+
+	section["UserName"]//用户名
+	Session["code"]//验证码
+	session["userID"]// 用户id
+
+
+	//管理员专用
+	Session["adminUserName"]

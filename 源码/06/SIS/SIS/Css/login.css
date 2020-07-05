@@ -1,0 +1,29 @@
+﻿body {
+    margin:0px;
+    padding:0px;
+    background-image:url('../images/newImg/logon_bg.png')
+}
+.custom-login-top,.custom-login-middle,.custom-login-bottom {
+    width:545px;
+}
+.custom-login-top {
+    background-image:url('../images/newImg/logon_top.png');
+    height:114px;
+}
+.custom-login-middle {
+    background-image:url('../images/newImg/logon_middle.png');    
+    height:210px;
+}
+.custom-login-bottom {
+    background-image:url('../images/newImg/logon_end.png');
+    height:61px;
+}
+.form-control {
+    width:260px;
+}
+.custom-login-btn {
+    margin-top:30px;
+}
+.container {
+    margin-top:10%;
+}

@@ -1,0 +1,176 @@
+路由器0：
+Router>enable
+Router#show running-config
+Building configuration...
+
+Current configuration : 671 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial1/0
+ ip address 202.114.66.5 255.255.255.252
+ clock rate 9600
+!
+interface Serial1/1
+ no ip address
+ shutdown
+!
+interface Serial1/2
+ no ip address
+ shutdown
+!
+interface Serial1/3
+ no ip address
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+!
+!
+!
+ip dhcp pool sss
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+
+
+Router#
+
+路由器1：
+Router#show running-config
+Building configuration...
+
+Current configuration : 577 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 202.114.66.9 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial1/0
+ ip address 202.114.66.6 255.255.255.252
+!
+interface Serial1/1
+ no ip address
+ shutdown
+!
+interface Serial1/2
+ no ip address
+ shutdown
+!
+interface Serial1/3
+ no ip address
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+路由器2：
+Router#show running-config
+Building configuration...
+
+Current configuration : 477 bytes
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 202.114.66.10 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 202.114.66.17 255.255.255.240
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+!
+!
+!
+ip dhcp pool ttt
+ network 202.114.66.16 255.255.255.240
+ default-router 202.114.66.17
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end

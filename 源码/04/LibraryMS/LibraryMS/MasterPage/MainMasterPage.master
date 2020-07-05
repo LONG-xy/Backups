@@ -1,0 +1,121 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMasterPage.master.cs" Inherits="MasterPage_MainMasterPage" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>图书馆管理系统首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/public.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/menu.css" rel="stylesheet" type="text/css"/>
+    
+    <script type="text/javascript" src="../Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Scripts/prefixfree.min.js"></script>
+    <link href="../css.css" rel="stylesheet" type="text/css"/>
+    <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 custom-col-header-left">&nbsp;</div>
+            <div class="col-sm-6 col-md-6 col-lg-6 custom-col-header-center">
+                <div class="custom-col-header-center-content-left"></div>
+                <div class="custom-col-header-center-content-right"></div>
+                <div class="custom-col-header-center-content">
+                </div>                
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 custom-col-header-right">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 custom-col-menu-left text-right">
+                <div class="custom-col-menu-center-content-dateinfo">
+                    <p>
+                        <asp:Label ID="labDate" runat="server"></asp:Label>&nbsp;
+                        <asp:Label ID="labXQ" runat="server"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="Button1" runat="server" Text="退出" CssClass="form-control btn-default btn-danger custom-btn" Width="60" OnClick="Button1_Click"/>
+                    </p>
+                    <p>
+                        图书馆管理系统的当前操作员：<asp:Label ID="labAdmin" runat="server"></asp:Label>！
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 custom-col-menu-center">
+                <div class="custom-col-menu-center-content">
+                    <ul class="menu cf">
+	                    <li><a href="../Default.aspx">首页</a></li>
+                        <%if (!IsReader) {  %>
+                            <%if (sysset){%>
+	                        <li>
+		                        <a>系统设置</a>
+		                        <ul class="submenu">
+			                        <li><a href="../SysSet/LibraryInfo.aspx">图书馆信息</a></li>
+			                        <li><a href="../SysSet/AdminManage.aspx">管理员设置</a></li>
+			                        <li><a href="../SysSet/BCaseManage.aspx">书架管理</a></li>
+		                        </ul>
+	                        </li>
+                            <%}if (readset){%>
+	                        <li>
+                                <a>读者管理</a>
+                                <ul class="submenu">
+			                        <li><a href="../ReaderManage/RTypeManage.aspx"">读者类型管理</a></li>
+			                        <li><a href="../ReaderManage/ReaderManage.aspx">读者档案管理</a></li>
+		                        </ul>
+	                        </li>
+                            <%}if (bookset){%>
+	                        <li>
+		                        <a>图书管理</a>
+		                        <ul class="submenu">
+			                        <li><a href="../BookManage/BTypeManage.aspx">图书类型管理</a></li>
+			                        <li><a href="../BookManage/BookManage.aspx">图书档案管理</a></li>
+		                        </ul>
+	                        </li>
+                            <%}%>
+                        <%} if (borrowback){%>
+                            <li>
+		                        <a>图书借还</a>
+		                        <ul class="submenu">
+			                        <li><a href="../BookBRManage/BorrowBook.aspx">图书借阅</a></li>
+			                        <li><a href="../BookBRManage/ReturnBook.aspx">图书归还</a></li>
+		                        </ul>
+	                        </li>
+                            <%} %>
+                        <%if (!IsReader && sysquery){%>
+	                        <li><a>系统查询</a>
+                                <ul class="submenu">
+			                        <li><a href="../SysQuery/BookQuery.aspx">图书档案查询</a></li>
+			                        <li><a href="../SysQuery/BBorrowQuery.aspx">图书借阅查询</a></li>
+		                        </ul>
+	                        </li>
+                        <%} %>
+                        <li><a>排行榜</a>
+                            <ul class="submenu">
+			                    <li><a href="../SortManage/BookBorrowSort.aspx">图书借阅排行榜</a></li>
+			                    <li><a href="../SortManage/ReaderBorrowSort.aspx">读者借阅排行榜</a></li>
+		                    </ul>
+	                    </li>
+                        <li><a href="../Common/ChanagePwd.aspx">更改口令</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 custom-col-menu-right">&nbsp;</div>
+        </div>
+        <div class="row custom-col-content">
+            <div class="col-sm-3 col-md-3">&nbsp;</div>
+            <div class="col-sm-6 col-md-6 ">                
+                <div class="custom-col-content-center">
+                    <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+                    </asp:contentplaceholder>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 custom-col-foot-left">&nbsp;</div>
+            <div class="col-sm-6 col-md-6 custom-col-foot-center">&nbsp;</div>
+            <div class="col-sm-3 col-md-3 custom-col-foot-right">&nbsp;</div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <style>
+        .div div {
+            width: 120px;
+        }
+    </style>
+    <script>
+        $(function () {
+            GetUserList();
+            SelectType();
+        });
+        //获取场景列表
+        function GetUserList() {
+            var serachSenceName = $('#serachSenceName').val();
+            var serachCode = $('#serachCode').val();
+            var serachModels = $('#serachModels').val();
+            var serachClass = $('#serachClass').val();
+            var serachStatus = $('#serachStatus').val();
+            var pd = { "t": "6", "userName": "admin", "senceName": serachSenceName, "Code": serachCode, "isModel": serachModels, "SenceType": serachClass, "State": serachStatus, "pageNum": pageNum, "RowCount": RowCount };
+            $.ajax({
+                type: "post",
+                url: "tools/Sence.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        var html = '<div>作者</div><div>场景编号</div><div>场景名称</div><div>创作时间</div><div>场景类型</div><div>生成模板</div><div style="width:50px;">点击率</div><div>状态</div><div style="width:195px;">操作</div>';
+                        $.each(dataobj.root, function (i, item) {
+                            var time = new Date(item.addtime).getFullYear() + "-" + (new Date(item.addtime).getMonth() + 1) + "-" + new Date(item.addtime).getDate();
+                            html += '<div id="id_' + item.scene_code + '" style="width:100%;background-color:#e9eaeb;"><div>' + item.user_name + '</div><div>' + item.scene_code + '</div><div>' + item.scene_name + '</div><div>' + time + '</div><div>' + item.msg + '</div><div>' + (item.Modeled == "1" ? "是" : "否") + '</div><div style="width:50px;">' + item.MouseClick + '</div><div>' + SetStatus(item.state_code_id) + '</div><div style="width:195px;"><input type="button" value="浏览" style="background-color:#83d195;"  onclick="SenceLook(\'' + item.scene_code + '\')" class="listbtn" /><input type="button" value="模板" style="background-color:#8db8dc;" onclick="SetModel(\'' + item.scene_code + '\')" class="listbtn" /><input type="button" value="修改" style="background-color:#e8ad49;" onclick="update(\'' + item.scene_code + '\')" class="listbtn" /></div></div>';
+                        });
+                        $('#userList').html(html);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            
+            var pd2 = { "t": "9", "userName": "admin", "senceName": serachSenceName, "Code": serachCode, "isModel": serachModels, "SenceType": serachClass, "State": serachStatus };
+            GetPage(pd2, "tools/Sence.ashx");
+        }
+        //查询用户状态中文名称
+        function SetStatus(a) {
+            switch (a) {
+                case "0":
+                    return "正常";
+                    break;
+                case "1":
+                    return "异常";
+                    break;
+                case "99":
+                    return "关键词违规";
+                    break;
+            }
+        }
+        //浏览场景
+        function SenceLook(a) {
+            EjectIdent('http://' + window.location.host + '/senceCreate/view.html?c=view&id=' + a + '&preview=preview', '', 320, 650);
+            $('#tdiv').css('border-radius', "50px");
+        }
+        //生成模板
+        function SetModel(a) {
+            EjectIdent("modelSenceType.html?t=" + a, "", "300", "300");
+            return;
+            
+        }
+        //点击修改
+        function update(a) {
+            window.open("../senceCreate/#/scene/create/" + a + "?pageId=1");
+        }
+        //查询类型
+        function SelectType() {
+            var pd = { "t": "1", "Gid": "2" };
+            $.ajax({
+                type: "post",
+                url: "../Tools/Code.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.msg;//显示文本
+                            var values = item.code_id;//值
+                            $('#serachClass').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <div style="height:60px;line-height:60px;">
+        <div style="float:left;margin-left:20px;">搜索区域：</div>
+        <div style="float:left;margin-left:20px;">场景名称：<input type="text" style="width:100px;" id="serachSenceName" /></div>
+        <div style="float:left;margin-left:20px;">场景编号：<input type="text" style="width:100px;" id="serachCode" /></div>
+        <div style="float:left;margin-left:20px;">
+            是否模板：<select id="serachModels">
+                <option value="-1">全部</option>
+                <option value="0">否</option>
+                <option value="1">是</option>
+            </select>
+        </div>
+        <div id="SenceDiv" style="float:left;margin-left:20px;">
+            场景类型：<select id="serachClass">
+                <option value="-1">全部</option>
+
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;">
+            状态：<select id="serachStatus">
+                <option value="-1">全部</option>
+                <option value="0">正常</option>
+                <option value="1">异常</option>
+                <option value="99">关键词违规</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;"><input type="button" id="serachBtn" value="查 询" style="width:80px; height:30px;" onclick="GetUserList()" /></div>
+    </div>
+    <hr style="width:100%;" />
+    <!--场景列表-->
+    <div id="userList" class="div">
+    </div>
+    <!--分页列表-->
+    <div id="pageList" style="clear:both;width:1088px;margin-left:auto;margin-right:auto;">
+        <font id="pageUp" class="fenye" onclick="SetPageDounOrUp(true)">上一页</font>
+        <font id="orderPageUp" style="margin:10px; float:left;" onclick="OrderPage(true)">.......</font>
+        <p id="CenterPage"></p>
+        <font id="orderPageDown" style="margin:10px; float:left;" onclick="OrderPage(false)">.......</font>
+        <font id="pageDown" class="fenye" onclick="SetPageDounOrUp(false)">下一页</font>
+        <font id="PageText" style="margin:10px;float:right;cursor:pointer;font-size:10px;line-height:40px;">当前页数:第 1 页 （共180条）</font>
+    </div>
+</body>
+</html>

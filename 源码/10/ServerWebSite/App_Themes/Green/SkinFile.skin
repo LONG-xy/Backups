@@ -1,0 +1,34 @@
+﻿<asp:TreeView SkinId="MSDN"
+      NodeStyle-ForeColor="Black"
+      NodeStyle-Font-Names="Verdana"
+      NodeStyle-Font-Size="8pt"
+      NodeStyle-HorizontalPadding="5"
+      HoverNodeStyle-BackColor="#cccccc"
+      HoverNodeStyle-BorderColor="#888888"
+      HoverNodeStyle-BorderWidth="1"
+      HoverNodeStyle-BorderStyle="Solid"
+      SelectedNodeStyle-BackColor="White"
+      SelectedNodeStyle-BorderColor="#888888"
+      SelectedNodeStyle-BorderWidth="1"
+      SelectedNodeStyle-BorderStyle="Solid" 
+      RootNodeStyle-Font-Bold="true" 
+      ParentNodeStyle-Font-Bold="true" 
+      NodeIndent="20"
+      runat="server"/>
+<asp:GridView  runat="server" AutoGenerateColumns="False" BorderWidth="0px" CellPadding="1" CellSpacing="1" Width="100%" BackColor="#B2E6A1">
+    <HeaderStyle CssClass="GvTitlebg"/>
+    <RowStyle BackColor="#FFFFFF" Height="25px"/>
+    <AlternatingRowStyle BackColor="#E7FDDE" Height="25px"/>
+</asp:GridView>
+
+<asp:Button runat="server" CssClass="buttonbgGray"/>
+
+<cc1:GridView  runat="server" AutoGenerateColumns="False" BorderWidth="0px" CellPadding="1" CellSpacing="1" Width="100%" BackColor="#B2E6A1"
+EmptyDataTableCssClass="datagridTable" EmptyDataTitleRowCssClass="GvTitlebg" EmptyDataContentRowCssClass="datagridContentRow">
+    <HeaderStyle CssClass="GvTitlebg"/>
+    <RowStyle BackColor="#FFFFFF" Height="25px"/>
+    <AlternatingRowStyle BackColor="#E7FDDE" Height="25px"/>
+</cc1:GridView>
+
+    <asp:TextBox runat="server" BorderColor="#B6B7AA" 
+        BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>

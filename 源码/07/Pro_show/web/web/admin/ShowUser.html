@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="../css/css.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/PublicMethod.js"></script>
+    <style>
+        .div {
+            width: 100%;
+            clear: both;
+            height: 40px;
+        }
+    </style>
+    <script>
+        $(function () {
+
+            //获取用户名
+            var url = location.search;
+            var uName = decodeURI(url.split('&')[0].replace("?uName=", ""));
+            var pd = { "t": "5", "uName": uName };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        $('#unameText').val(uName);
+                        $('#phoneText').val(data.Phone);
+                        $('#emailText').val(data.email);
+                        $('#qqText').val(data.qq);
+                        $('#weText').val(data.wechat);
+                        $('#sexText').val(data.gender);
+                        $('#addtimeText').val(data.addtime);
+                        $('#statusText').val(data.state);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+
+        });
+        //修改 var time = new Date(item.addtime).getFullYear() + "-" + (new Date(item.addtime).getMonth() + 1) + "-" + new Date(item.addtime).getDate();
+        function UpdateBtn() {
+            var url = location.search;
+            var uName = decodeURI(url.split('&')[0].replace("?uName=", ""));
+            var userDes = $('#id_' + uName, parent.document);
+            //userDes.children("div").eq(0).html()
+            var uName = $('#unameText').val();
+            var Phone = $('#phoneText').val();
+            var email = $('#emailText').val();
+            var qq = $('#qqText').val();
+            var wechat = $('#weText').val();
+            var gender = $('#sexText').val();
+            var addtime = $('#addtimeText').val();
+            var state = $('#statusText').val();
+            var time = new Date(addtime).getFullYear() + "-" + (new Date(addtime).getMonth() + 1) + "-" + new Date(addtime).getDate();
+            userDes.children("div").eq(1).html(Phone)
+            userDes.children("div").eq(2).html(email)
+            userDes.children("div").eq(3).html(qq)
+            userDes.children("div").eq(4).html(wechat)
+            userDes.children("div").eq(5).html(gender == "0" ? "女" : "男")
+            userDes.children("div").eq(6).html(time)
+            userDes.children("div").eq(7).html(SetStatus(state))
+
+            var pd = { "t": "6", "Phone": Phone, "email": email, "qq": qq, "wechat": wechat, "gender": gender, "addtime": addtime, "state_code_id": state, "user_name": uName };
+            RunFunInSrervice(pd, "tools/user.ashx");
+
+
+            //关闭本窗体
+            var close = $('#CloseCover', parent.document);
+            $('#coverDiv', parent.document).remove();
+            $(close).parent().parent().remove();
+        }
+        //查询用户状态中文名称
+        function SetStatus(a) {
+            switch (a) {
+                case "0":
+                    return "正常";
+                    break;
+                case "1":
+                    return "异常";
+                    break;
+                case "99":
+                    return "恶意用户";
+                    break;
+                case "50":
+                    return "邮箱未验证用";
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:300px;height:100%;margin:50px auto;">
+        <div class="div"><div style="width:100px; float:left;">用户名：</div><div style="float:left;"><input id="unameText" type="text" readonly /></div></div>
+        <div class="div"><div style="width:100px; float:left;">手机号：</div><div style="float:left;"><input id="phoneText" type="text" /></div></div>
+        <div class="div"><div style="width:100px; float:left;">Email：</div><div style="float:left;"><input id="emailText" type="text" /></div></div>
+        <div class="div"><div style="width:100px; float:left;">QQ：</div><div style="float:left;"><input id="qqText" type="text" /></div></div>
+        <div class="div"><div style="width:100px; float:left;">微信：</div><div style="float:left;"><input id="weText" type="text" /></div></div>
+        <div class="div"><div style="width:100px; float:left;">性别：</div><div style="float:left;"><select id="sexText" style="width:100px;"><option value="0">女</option><option value="1">男</option></select></div></div>
+        <div class="div"><div style="width:100px; float:left;">注册时间：</div><div style="float:left;"><input id="addtimeText" type="text" /></div></div>
+        <div class="div">
+            <div style="width:100px; float:left;">用户状态：</div>
+            <div style="float:left;">
+                <select id="statusText" style="width:100px;">
+                    <option value="0">正常</option>
+                    <option value="1">异常</option>
+                    <option value="99">恶意用户</option>
+                    <option value="50">邮箱未验证用户</option>
+                </select>
+            </div>
+        </div>
+        <div class="div" style="width:100px;margin:30px auto;">
+            <input type="button" style="width:100px; height:60px;" onclick="UpdateBtn()" value="修改" />
+        </div>
+    </div>
+</body>
+</html>

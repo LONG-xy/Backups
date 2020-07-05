@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="db_MRQA" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=db_MRQA;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db_MRQAConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tb_Catalog" Member="tb_Catalog">
+    <Type Name="tb_Catalog">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Layer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DisplayOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tb_Catalog_tb_Question" Member="tb_Question" ThisKey="Code" OtherKey="CatalogCode" Type="tb_Question" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Config" Member="tb_Config">
+    <Type Name="tb_Config">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Solved" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnSolved" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Question" Member="tb_Question">
+    <Type Name="tb_Question">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CatalogCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Mark" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PostDatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="State" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tb_Question_tb_Answer" Member="tb_Answer" ThisKey="Code" OtherKey="QuestionCode" Type="tb_Answer" />
+      <Association Name="tb_Catalog_tb_Question" Member="tb_Catalog" ThisKey="CatalogCode" OtherKey="Code" Type="tb_Catalog" IsForeignKey="true" />
+      <Association Name="tb_UserInfo_tb_Question" Member="tb_UserInfo" ThisKey="UserCode" OtherKey="Code" Type="tb_UserInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_Answer" Member="tb_Answer">
+    <Type Name="tb_Answer">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BestAnswer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PostDatetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VoteNice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VoteBad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tb_Question_tb_Answer" Member="tb_Question" ThisKey="QuestionCode" OtherKey="Code" Type="tb_Question" IsForeignKey="true" />
+      <Association Name="tb_UserInfo_tb_Answer" Member="tb_UserInfo" ThisKey="UserCode" OtherKey="Code" Type="tb_UserInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_UserInfo" Member="tb_UserInfo">
+    <Type Name="tb_UserInfo">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Sex" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mark" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RewardMark" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaidMark" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ACount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AAcceptCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QSolvedCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUnsolveCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QCancelledCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tb_UserInfo_tb_Question" Member="tb_Question" ThisKey="Code" OtherKey="UserCode" Type="tb_Question" />
+      <Association Name="tb_UserInfo_tb_Answer" Member="tb_Answer" ThisKey="Code" OtherKey="UserCode" Type="tb_Answer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_QuestionCatalog" Member="vw_QuestionCatalog">
+    <Type Name="vw_QuestionCatalog">
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="qcnt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="acnt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lastTitle" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="lastCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,132 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Themes_MasterPage"
+    EnableViewState="true" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>明日进销存管理系统</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- Meta Tags -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index, follow" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="Css/Master.css" media="screen,projection" type="text/css" />
+    <link rel="stylesheet" href="Css/screen.css" media="screen,projection" type="text/css" />
+</head>
+<body class="mainbg">
+    <form id="form1" runat="server">
+    &nbsp;<!-- JavaScript --><script type="text/javascript" src="<%= _prototype %>"></script><script type="text/javascript" src="<%= _lightbox %>"></script><div>
+        <center>
+            <div style="text-align: left; width: 990px;">
+                <table style="height: 81px; width: 990px;" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td class="top">
+                          <table width="987" height="81" border="0" cellpadding="0" cellspacing="0" class="table">
+                            <tr>
+                              <td colspan="3" class="jinxiaocun-index-lan0"></td>
+                            </tr>
+                            <tr>
+                              <td width="630" class="jinxiaocun-index-lan02"></td>
+                              <td width="317" valign="middle" class="jinxiaocun-index-lan03">
+                                <asp:Menu ID="menuTemplate" runat="server" MaximumDynamicDisplayLevels="1" Orientation="Horizontal"
+                                    OnMenuItemClick="menuTemplate_MenuItemClick" Visible="false">
+                                    <Items>
+                                        <asp:MenuItem Text="蓝色模板" Value="Blue"></asp:MenuItem>
+                                        <asp:MenuItem Text="紫色模板" Value="Purple"></asp:MenuItem>
+                                        <asp:MenuItem Text="绿色模板" Value="Green"></asp:MenuItem>
+                                        <asp:MenuItem Text="橙色模板" Value="Orange"></asp:MenuItem>
+                                    </Items>
+                                </asp:Menu>
+                              </td>
+                              <td class="jinxiaocun-index-lan04"></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" class="jinxiaocun-index-lan05"></td>
+                            </tr>
+                          </table>
+                      </td>
+                    </tr>
+                </table>
+                <table width="990" style="height: 495px;" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="200" valign="top" class="border">
+                            <table width="198px" style="height: 495px; background-color: #FFFFFF" border="0"
+                                cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="top" style="padding-top: 5px; padding-left: 3px;">
+                                        <div style="height: 495px; overflow: auto; width: 100%;">
+                                            <asp:TreeView ID="tvNavigation" runat="server" ExpandDepth="5" Width="100%" SkinID="MSDN"
+                                                DataSourceID="treeSource" ShowLines="True">
+                                                <DataBindings>
+                                                    <asp:TreeNodeBinding DataMember="sitemap" ImageUrlField="imgUrl" SelectAction="Expand"
+                                                        TextField="title" ToolTipField="description" ValueField="value" />
+                                                    <asp:TreeNodeBinding DataMember="sitefolder" ImageUrlField="imgUrl" SelectAction="Expand"
+                                                        TextField="title" ToolTipField="description" ValueField="value" />
+                                                    <asp:TreeNodeBinding DataMember="sitefolder" ImageUrlField="imgUrl" SelectAction="Expand"
+                                                        TextField="title" ToolTipField="description" ValueField="value" />
+                                                    <asp:TreeNodeBinding DataMember="sitefolder" ImageUrlField="imgUrl" SelectAction="Expand"
+                                                        TextField="title" ToolTipField="description" ValueField="value" />
+                                                    <asp:TreeNodeBinding DataMember="sitenode" ImageUrlField="imgUrl" NavigateUrlField="url"
+                                                        TextField="title" ToolTipField="description" ValueField="value" />
+                                                </DataBindings>
+                                            </asp:TreeView>
+                                            <asp:XmlDataSource ID="treeSource" runat="server" DataFile="~/Themes/Xml/SiteMap.xml">
+                                            </asp:XmlDataSource>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table width="100%" style="height: 50px; background-color: #efefef;" border="0"
+                                cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td width="5" valign="top" class="mainbg">
+                                        &nbsp;
+                                    </td>
+                                    <td valign="top" class="border" width="785">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td height="27" class="bordertop">
+                                                    <table width="100%" style="height: 25px;" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td width="15" class="maintopleft">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td width="150" align="center" class="maintoptab">
+                                                                <asp:Literal ID="litNavigation" runat="server" Text="系统默认页"></asp:Literal>
+                                                            </td>
+                                                            <td width="15" class="maintopright">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td class="maintopbg">
+                                                                &nbsp;
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" style="height:460px;" valign="top">
+                                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                                    </asp:ContentPlaceHolder>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="masterPageBottom">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </center>
+    </div>
+    </form>
+</body>
+</html>

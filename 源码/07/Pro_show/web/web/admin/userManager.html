@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            GetUserList();
+        });
+        //获取用户列表
+        function GetUserList() {
+            var userName = $('#serachUserName').val();
+            var serachPhone = $('#serachPhone').val();
+            var serachEmaill = $('#serachEmaill').val();
+            var serachStatus = $('#serachStatus').val();
+            var pd = { "t": "3", "userName": userName, "phone": serachPhone, "Email": serachEmaill, "status": serachStatus, "pageNum": pageNum, "RowCount": RowCount };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        var html = '<div>用户名</div><div>手机号</div><div>Emaill</div><div>QQ</div><div>微信</div><div>性别</div><div>注册时间</div><div>用户状态</div>';
+                        $.each(dataobj.root, function (i, item) {
+                            var time = new Date(item.addtime).getFullYear() + "-" + (new Date(item.addtime).getMonth() + 1) + "-" + new Date(item.addtime).getDate();
+                            html += '<div id="id_' + item.user_name + '" style="width:100%;background-color:#e9eaeb;" onclick="UserClick(\'' + item.user_name + '\')"><div>' + item.user_name + '</div><div>' + item.Phone + '</div><div>' + item.email + '</div><div>' + item.qq + '</div><div>' + item.wechat + '</div><div>' + (item.gender == "0" ? "女" : "男") + '</div><div>' + time + '</div><div>' + SetStatus(item.state_code_id) + '</div></div>';
+                        });
+                        $('#userList').html(html);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            var pd2 = { "t": "4", "userName": userName, "phone": serachPhone, "Email": serachEmaill, "status": serachStatus };
+            GetPage(pd2, "tools/user.ashx");
+        }
+        //查询用户状态中文名称
+        function SetStatus(a) {
+            switch (a) {
+                case "0":
+                    return "正常";
+                    break;
+                case "1":
+                    return "异常";
+                    break;
+                case "99":
+                    return "恶意用户";
+                    break;
+                case "50":
+                    return "邮箱未验证用";
+                    break;
+            }
+        }
+        //点击用户名
+        function UserClick(a) {
+            EjectIdent('ShowUser.html?uName=' + encodeURI(a), '您要使用的场景', 400, 550);
+        }
+    </script>
+</head>
+<body>
+    <div style="height:60px;line-height:60px;">
+        <div style="float:left;margin-left:100px;">搜索区域：</div>
+        <div style="float:left;margin-left:20px;">用户名：<input type="text" id="serachUserName" /></div>
+        <div style="float:left;margin-left:20px;">手机号：<input type="text" id="serachPhone" /></div>
+        <div style="float:left;margin-left:20px;">邮箱：<input type="text" id="serachEmaill" /></div>
+        <div style="float:left;margin-left:20px;">
+            状态：<select id="serachStatus">
+                <option value="-1">全部</option>
+                <option value="0">正常</option>
+                <option value="1">异常</option>
+                <option value="99">恶意用户</option>
+                <option value="50">邮箱未验证用户</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:50px;"><input type="button" id="serachBtn" value="查 询" style="width:80px; height:30px;" onclick="GetUserList()" /></div>
+    </div>
+    <hr style="width:100%;" />
+    <!--人员列表-->
+    <div id="userList" class="div">
+    </div>
+    <!--分页列表-->
+    <div id="pageList" style="clear:both;width:1088px;margin-left:auto;margin-right:auto;">
+        <font id="pageUp" class="fenye" onclick="SetPageDounOrUp(true)">上一页</font>
+        <font id="orderPageUp" style="margin:10px; float:left;" onclick="OrderPage(true)">.......</font>
+        <p id="CenterPage"></p>
+        <font id="orderPageDown" style="margin:10px; float:left;" onclick="OrderPage(false)">.......</font>
+        <font id="pageDown" class="fenye" onclick="SetPageDounOrUp(false)">下一页</font>
+        <font id="PageText" style="margin:10px;float:right;cursor:pointer;font-size:10px;line-height:40px;">当前页数:第 1 页 （共180条）</font>
+    </div>
+</body>
+</html>

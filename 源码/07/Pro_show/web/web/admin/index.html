@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../css/css.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <script>
+        $(function () {
+            UserManagerClick('#lbtn');
+            window.setInterval(function () {
+                var dt = new Date();
+                $('#date').html(dt.toLocaleString());
+            }, 1000);
+        })
+        function out() {
+            window.location.href = "adminOut.html";
+        }
+        function resetbtn(a)
+        {
+            $('.listBtn').css('background-image', 'url(img/后台管理_05.png)');
+            $(a).css('background-image', 'url(img/后台管理_02.png)');
+        }
+        function UserManagerClick(a)
+        {
+            $('#html').load('userManager.html');
+            resetbtn(a);
+        }
+        function UserCemceClick(a)
+        {
+            $('#html').load('userCence.html');
+            resetbtn(a);
+        }
+        function WebCemceClick(a) {
+            $('#html').load('WebSence.html');
+            resetbtn(a);
+        }
+        function WebModelClick(a) {
+            $('#html').load('webModel.html');
+            resetbtn(a);
+        }
+        function CodeClick(a) {
+            $('#html').load('Code.html');
+            resetbtn(a);
+        }
+    </script>
+    <style>
+        .listBtn {
+        width:100%; height:60px;text-align:center;line-height:60px;cursor:pointer;
+        background-image:url('img/后台管理_05.png');
+        color:rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100%;height:94px;min-width:1325px; background-image:url('img/后台管理2_01.png'); background-color:#0a0707;">
+        <div style="float:right; line-height:40px; margin-right:60px; cursor:pointer;color:rgb(255, 255, 255);margin-top:30px;" onclick="out()">【退出】</div>
+        <div style="float:right; line-height:40px;  margin-right:20px; cursor:pointer;color:rgb(255, 255, 255);margin-top:30px;">管理员</div>
+        <div style="float:right; line-height:40px; margin-left:30px; cursor:pointer; color:rgb(255, 255, 255); margin-right:90px;margin-top:30px;" id="date"></div>
+    </div>
+    <div style="min-width:1325px;">
+        <div style="float:left; width:15%; height:880px; min-width:200px;background-color:#47515b;">
+            <div id="lbtn" class="listBtn" onclick="UserManagerClick(this)">
+                用户管理
+            </div>
+            <div class="listBtn" onclick="UserCemceClick(this)">
+                【用户】场景管理
+            </div>
+            <div class="listBtn" onclick="WebCemceClick(this)">
+                【网站】场景管理
+            </div>
+            <div class="listBtn" onclick="WebModelClick(this)">
+                【网站】模板管理
+            </div>
+            <div class="listBtn" onclick="CodeClick(this)">
+                【网站】基础信息维护
+            </div>
+        </div>
+        <div id="html" style="float:left; width:84.5%; height:880px; min-width:1024px; border:1px solid rgb(212, 212, 212);">
+
+        </div>
+    </div>
+</body>
+</html>

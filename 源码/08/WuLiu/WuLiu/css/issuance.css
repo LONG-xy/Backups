@@ -1,0 +1,18 @@
+﻿.issuance-right {
+    margin-top:50px;
+}
+.form-control-clear {
+    display:table-cell;
+}
+.row {
+    margin-top:10px;
+}
+.row .col-sm-8 input[type=text],.row .col-sm-6 input[type=text],.row .col-sm-6 select,.row .col-sm-8 select{
+    width:70%;
+}
+.form-control-radio input {
+ 
+}
+.form-control-radio label{
+   
+}

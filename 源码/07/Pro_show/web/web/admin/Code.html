@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <style>
+        .div {
+            width: 480px;
+        }
+
+            .div div {
+                width: 120px;
+            }
+    </style>
+    <script>
+        $(function () {
+            SelectType();
+            GetUserList();
+
+        });
+        //获取场景列表
+        function GetUserList() {
+            var codegroup = $('#serachModels').val();
+            var pd = { "t": "8", "codegroup": codegroup, "pageNum": pageNum, "RowCount": RowCount };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        var html = '<div>基本类型</div><div>类型名称</div><div>状态</div><div>操作</div>';
+                        $.each(dataobj.root, function (i, item) {
+                            var btnStr = item.state == "0" ? "停用" : "启用";
+                            html += '<div id="id_' + item.code_id + '" style="width:100%;background-color:#e9eaeb;"><div>' + item.group_msg + '</div><div id="msg_' + item.code_id + '">' + item.msg + '</div><div id="stat_' + item.code_id + '">' + SetStatus(item.state) + '</div><div style="line-height:60px;"><input type="button" value="' + btnStr + '" style="background-color:#e97777;" onclick="SenceLook(\'' + item.code_id + '\',' + item.group_id + ',' + item.state + ',this)" class="listbtn" /><input type="button" value="修改" style="background-color:#e8ad49;" onclick="update(\'' + item.code_id + '\',' + item.group_id + ')" class="listbtn" /></div></div>';
+                        });
+                        $('#userList').html(html); tind
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+
+            var pd2 = { "t": "9", "codegroup": codegroup };
+            GetPage(pd2, "tools/user.ashx");
+        }
+        //查询用户状态中文名称
+        function SetStatus(a) {
+            switch (a) {
+                case "0":
+                    return "正常";
+                    break;
+                case "1":
+                    return "异常";
+                    break;
+            }
+        }
+        //查询类型
+        function SelectType() {
+            var pd = { "t": "7" };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.group_msg;//显示文本
+                            var values = item.group_id;//值
+                            $('#serachModels').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //停用，启用
+        function SenceLook(a, b, c, btnthis) {
+            //codeid //类型id  //0是正在启用 1是正在停用
+            var str = $('#stat_' + a).html();
+            if (str == "正常") {
+                c = 0;
+            }
+            else {
+                c = 1;
+            }
+            var pd = { "t": "10", "codeid": a, "groupid": b, "status": (c == 0 ? "1" : "0") };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var btnStr = c == "0" ? "启用" : "停用";
+                        $('#stat_' + a).html(c == "0" ? "异常" : "正常");
+                        $(btnthis).attr("value", btnStr);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //点击修改
+        function update(a, b) {
+            EjectIdent("showCode.html?codeid=" + a + "&gid=" + b, "", "300", "300");
+        }
+        //添加字典
+        function GetAddCode() {
+            EjectIdent("AddCode.html","", "600", "600");
+        }
+    </script>
+</head>
+<body>
+    <div style="height:60px;line-height:60px;">
+        <div style="float:left;margin-left:20px;">搜索区域：</div>
+        <div style="float:left;margin-left:20px;">
+            基本类型：<select id="serachModels">
+                <option value="-1">全部</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;"><input type="button" id="serachBtn" value="查 询" style="width:80px; height:30px;" onclick="GetUserList()" /></div>
+        <div style="float:left;margin-left:20px;"><input type="button" id="AddBtn" value="添 加" style="width:80px; height:30px;" onclick="GetAddCode()" /></div>
+    </div>
+    <hr style="width:100%;" />
+    <!--场景列表-->
+    <div id="userList" class="div">
+    </div>
+    <!--分页列表-->
+    <div id="pageList" style="clear:both;width:1088px;margin-left:auto;margin-right:auto;">
+        <font id="pageUp" class="fenye" onclick="SetPageDounOrUp(true)">上一页</font>
+        <font id="orderPageUp" style="margin:10px; float:left;" onclick="OrderPage(true)">.......</font>
+        <p id="CenterPage"></p>
+        <font id="orderPageDown" style="margin:10px; float:left;" onclick="OrderPage(false)">.......</font>
+        <font id="pageDown" class="fenye" onclick="SetPageDounOrUp(false)">下一页</font>
+        <font id="PageText" style="margin:10px;float:right;cursor:pointer;font-size:10px;line-height:40px;">当前页数:第 1 页 （共180条）</font>
+    </div>
+</body>
+</html>

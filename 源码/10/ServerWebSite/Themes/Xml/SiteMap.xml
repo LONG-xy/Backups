@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sitemap title="明日知道" value="a0" description="明日知道" imgUrl="~/Themes/Images/Navigation/Cube.bmp">
+
+  <sitefolder url="" title="后台管理" value="d1"  description="后台管理" imgUrl="~/Themes/Images/Navigation/folder.gif">
+    <sitenode url="~/UserManager.aspx" value="d2" title="用户管理"  description="用户管理"  target="_self" imgUrl="~/Themes/Images/Navigation/page.gif"/>
+    <sitenode url="~/QuestionManager.aspx" value="d3" title="问题管理"  description="问题管理"  target="_self" imgUrl="~/Themes/Images/Navigation/page.gif"/>
+  </sitefolder>
+
+</sitemap>
+
+

@@ -1,0 +1,49 @@
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.2
+ encapsulation dot1Q 2
+ ip address 192.168.1.254 255.255.255.0
+!
+interface FastEthernet0/0.5
+ encapsulation dot1Q 5
+ ip address 202.114.66.254 255.255.255.0
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+

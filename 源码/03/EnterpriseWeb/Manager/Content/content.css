@@ -1,0 +1,20 @@
+﻿.container-row-control1 .row{
+    margin-top:20px;
+}
+.form-control1-line {
+    display:table-cell;
+}
+input[type="file"] {
+    display: table-cell;
+}
+th {
+    text-align:center;
+}
+.gv-search {
+    width:80%;
+    margin:0px auto; 
+    margin-bottom:10px;
+}
+.panel-body {
+    margin-top:30px;
+}

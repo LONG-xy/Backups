@@ -1,0 +1,33 @@
+﻿.div {
+    margin-top: 10px;
+    width: 1088px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .div div {
+        border-bottom: 1px solid rgb(202, 202, 202);
+        width: 136px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        float: left;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+.fenye {
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+}
+.listbtn {
+    cursor:pointer;
+    margin-left:5px;
+    border:none;
+    color:rgb(255, 255, 255);
+    height:23px;
+    width:40px;
+    font-weight:600;
+}

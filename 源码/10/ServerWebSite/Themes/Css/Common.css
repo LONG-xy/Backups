@@ -1,0 +1,34 @@
+.tablebig {
+	border-top-color: #d7d7d7;
+	border-right-color: #d7d7d7;
+	border-bottom-color: #d7d7d7;
+	border-left-color: #d7d7d7;
+	background-color: #efefef;
+	height: auto;
+	width: auto;
+}
+.tablexiao {
+	height: auto;
+	line-height: normal;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.textfield {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: inset;
+	border-right-style: inset;
+	border-bottom-style: inset;
+	border-left-style: inset;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+	width: 130px;
+}

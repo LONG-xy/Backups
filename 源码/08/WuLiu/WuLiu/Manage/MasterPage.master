@@ -1,0 +1,121 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Manage_MasterPage" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>优送后台管理</title>
+    <link href="../css/Manage.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="../Scripts/customScrollbar.min.js"></script>
+    <script src="../Scripts/Manage.js"></script>
+     
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="main-wrap">
+           <div class="side-nav">
+		        <div class="side-logo">
+			        <div class="logo">
+				        <span class="logo-ico">
+					        <i class="i-l-1"></i>
+					        <i class="i-l-2"></i>
+					        <i class="i-l-3"></i>
+				        </span>
+				        <strong>优送物流后台管理</strong>
+			        </div>
+		        </div>		
+		        <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
+			        <h2>
+				        <a href="" class="InitialPage"><i class="icon-home"></i>首页</a>
+			        </h2>
+			        <ul>
+				        <li class="<%=open1 %>">
+					        <dl>
+						        <dt>
+							        <i class="icon-info-sign"></i>信息管理<i class="icon-angle-right"></i>
+						        </dt>
+						        <dd>
+							        <a href="manage_Freight.aspx?open1=open">货源信息管理</a>
+						        </dd>
+						        <dd>    
+							        <a href="manage_Truck.aspx?open1=open">车源信息管理</a>
+						        </dd>
+                                <dd>
+							        <a href="manage_Special.aspx?open1=open">专线信息管理</a>
+						        </dd>
+                                <dd>
+							        <a href="manage_Depot.aspx?open1=open">仓储信息管理</a>
+						        </dd>
+                                <dd>
+							        <a href="manage_Job.aspx?open1=open">招聘信息管理</a>
+						        </dd>
+					        </dl>
+				        </li>
+				        <li class="<%=open2 %>">
+					        <dl>
+						        <dt>
+							        <i class="icon-user"></i>用户管理<i class="icon-angle-right"></i>
+						        </dt>
+						        <dd>
+							        <a href="manage_grUser.aspx?open2=open">个人用户管理</a> 
+						        </dd>
+                                <dd>
+							        <a href="manage_qyUser.aspx?open2=open">企业用户管理</a>
+						        </dd>
+					        </dl>
+				        </li>
+				        <li class="<%=open3 %>">
+					        <dl>
+						        <dt>
+							        <i class="icon-th-list"></i>新闻管理<i class="icon-angle-right"></i>
+						        </dt>
+						        <dd>
+							        <a href="manage_issuanceNews.aspx?open3=open">发布新闻</a>
+						        </dd>
+                                <dd>
+							        <a href="manage_news.aspx?open3=open">新闻管理</a>
+						        </dd>
+					        </dl>
+				        </li>
+			        </ul>
+		        </nav>
+		        <footer class="side-footer">© XX公司 版权所有</footer>
+	        </div>
+           <div class="content-wrap">
+		        <header class="top-hd">
+			        <div class="hd-lt">
+				        <a class="icon-reorder"></a>
+			        </div>
+			        <div class="hd-rt">
+				        <ul>
+					        <li>
+						        <a href="../index.aspx" target="_blank"><i class="icon-home"></i>前台访问</a>
+					        </li>
+					        <li>
+						        <a><i class="icon-bell-alt"></i>系统消息</a>
+					        </li>
+					        <li>
+						        <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+					        </li>
+				        </ul>
+			        </div>
+		        </header>		
+                <main class="main-cont content mCustomScrollbar">
+			        <!--开始::内容-->
+			        <div class="page-wrap">				
+				        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+			        </div>
+                    <!--开始::结束-->
+		        </main>
+		        <footer class="btm-ft">
+			        <p class="clear">
+				        <span class="fl">©Copyright 2016 <a href="http://www.deathghost.cn" title="DeathGhost" target="_blank">xx.cn</a></span>				        
+			        </p>
+		        </footer>
+	        </div>
+        </div>
+    </form>
+</body>
+</html>

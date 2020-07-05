@@ -1,0 +1,315 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="admin.master.cs" Inherits="Manage_admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <script type="text/javascript" src="../Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/assets/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/assets/zabuto_calendar.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/assets/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/assets/style.css" rel="stylesheet" type="text/css"/>    
+    
+    <!-- Custom styles for this template -->
+    <link href="../Content/custom/style.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/custom/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <script src="../Content/custom/Chart.js" type="text/javascript"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../Content/iehtml5/html5shiv.js" type="text/javascript"></script>
+      <script src="../Content/iehtml5/respond.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <style>
+        .logout {
+            cursor:pointer;
+        }
+        .sub a span {
+            cursor:pointer;
+        }
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+    <section id="container" >
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="展开/关闭导航"></div>
+            </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>电子商城后台系统</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge bg-theme">4</span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">您有4个待处理任务</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">任务1</div>
+                                        <div class="percent">40%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">完成40%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">任务2</div>
+                                        <div class="percent">60%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">完成60%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">任务3</div>
+                                        <div class="percent">80%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">完成80%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">任务4</div>
+                                        <div class="percent">70%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                            <span class="sr-only">完成70%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="external">
+                                <a href="#">查看所有任务</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- inbox dropdown start-->
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge bg-theme">5</span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">您有5条未读消息</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">用户1</span>
+                                    <span class="time">刚刚</span>
+                                    </span>
+                                    <span class="message">
+                                        刚刚的订单是否需要处理？
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">用户2</span>
+                                    <span class="time">40 分钟.</span>
+                                    </span>
+                                    <span class="message">
+                                       我需要你的帮助。
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">用户3</span>
+                                    <span class="time">2 小时.</span>
+                                    </span>
+                                    <span class="message">
+                                        请审核我提交的工作流。
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 小时.</span>
+                                    </span>
+                                    <span class="message">
+                                        请尽快回复.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">查看所有消息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- inbox dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    <li>
+                        <asp:HyperLink ID="HyperLink1" CssClass="logout" runat="server">退出</asp:HyperLink></li>
+            	</ul>
+            </div>
+        </header>
+        <!--header end-->
+      
+        <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar"  class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">              
+              	    <p class="centered"><a href="AdminIndex.aspx"><img src="../images/logo.png" class="img-circle" width="60"></a></p>
+              	    <h5 class="centered">隆欣</h5>              	  	
+                    <li class="mt">
+                        <a class="<%=menuInt==0?"active":"" %>" href="AdminIndex.aspx">
+                            <i class="fa fa-desktop"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="<%=menuInt >= 1 && menuInt <= 6 ? "active" : "" %>">
+                            <i class="fa fa-book"></i>
+                            <span>订单管理</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="<%=menuInt==1?"active":"" %>"><a href="OrderList.aspx?OrderList=00&menu=1">未确认</a></li>
+                            <li class="<%=menuInt==2?"active":"" %>"><a href="OrderList.aspx?OrderList=01&menu=2">已确认</a></li>
+                            <li class="<%=menuInt==3?"active":"" %>"><a href="OrderList.aspx?OrderList=10&menu=3">未发货</a></li>
+                            <li class="<%=menuInt==4?"active":"" %>"><a href="OrderList.aspx?OrderList=11&menu=4">已发货</a></li>
+                            <li class="<%=menuInt==5?"active":"" %>"><a href="OrderList.aspx?OrderList=20&menu=5">未归档</a></li>
+                            <li class="<%=menuInt==6?"active":"" %>"><a href="OrderList.aspx?OrderList=21&menu=6">已归档</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="<%=menuInt >= 7 && menuInt <= 8 ? "active" : "" %>">
+                            <i class="fa fa-dashboard"></i>
+                            <span>库存管理</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="<%=menuInt==7?"active":"" %>"><a><span onclick="javascript:location.href='ProductAdd.aspx?menu=7'">商品添加</span>&nbsp;|&nbsp;<span onclick="javascript:location.href='Product.aspx?menu=7'">管理</span></a></li>
+                            <li class="<%=menuInt==8?"active":"" %>"><a><span onclick="javascript:location.href='CategoryAdd.aspx?menu=8'">类别添加</span>&nbsp;|&nbsp;<span onclick="javascript:location.href='Category.aspx?menu=8'">管理</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="<%=menuInt == 9 ? "active" : "" %>">
+                            <i class="fa fa-th"></i>
+                            <span>管理员管理</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="<%=menuInt == 9 ? "active" : "" %>"><a><span onclick="javascript:location.href='MemberAdd.aspx?menu=9'">添加管理员</span>&nbsp;|&nbsp;<span onclick="javascript:location.href='Member.aspx?menu=9'">管理</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;"  class="<%=menuInt == 10 ? "active" : "" %>">
+                            <i class="fa fa-tasks"></i>
+                            <span>用户管理</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="<%=menuInt == 10 ? "active" : "" %>"><a  href="Manager.aspx?menu=10">管理会员</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="<%=menuInt >= 11 && menuInt <= 12 ? "active" : "" %>">
+                            <i class="fa fa-cogs"></i>
+                            <span>系统管理</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="<%=menuInt == 11 ? "active" : "" %>"><a  href="imagery.aspx?menu=11">上传管理</a></li>
+                            <li class="<%=menuInt == 12 ? "active" : "" %>"><a  href="LeaveWordManage.aspx?menu=12">留言管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--*********************************************************************************************************************************************************
+             MAIN CONTENT
+            *********************************************************************************************************************************************************** -->
+        <!--main content start-->
+        <section id="main-content">
+          <section class="wrapper">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+          </section>
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2017 <a href="#">电子商城</a> - <a href="#">后台管理系统</a>
+                <a href="index.html#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+    </form>
+     <!-- js placed at the end of the document so the pages load faster -->
+    
+    <script class="include" type="text/javascript" src="../Content/assets/jquery.dcjqaccordion.2.7.js"></script>
+    <script type="text/javascript" src="../Content/assets/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="../Content/assets/jquery.nicescroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../Content/assets/jquery.sparkline.js"></script>
+
+
+    <!--common script for all pages-->
+    <script type="text/javascript" src="../Content/assets/common-scripts.js"></script>
+    
+    <script type="text/javascript" src="../Content/assets/jquery.gritter.js"></script>
+    <script type="text/javascript" src="../Content/assets/gritter-conf.js"></script>
+</body>
+</html>

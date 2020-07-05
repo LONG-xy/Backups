@@ -1,0 +1,66 @@
+!
+version 12.4
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip ssh version 1
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial1/0
+ ip address 202.114.66.1 255.255.255.0
+ ip access-group 101 out
+ clock rate 9600
+!
+interface Serial1/1
+ no ip address
+ shutdown
+!
+interface Serial1/2
+ no ip address
+ shutdown
+!
+interface Serial1/3
+ no ip address
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+ version 2
+ network 192.168.1.0
+ network 192.168.2.0
+ network 202.114.66.0
+ network 202.114.67.0
+ network 202.114.68.0
+!
+ip classless
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+!
+!
+end
+

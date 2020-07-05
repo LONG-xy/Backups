@@ -1,0 +1,72 @@
+.gv_news a{
+    font-size:14px;
+    color:#FFFFFF;
+    text-decoration:underline;
+}
+.gridCompany {
+    color:#FFFFFF;
+}
+.gridCompany a{
+    color:#FFFFFF;
+    text-decoration:underline;
+}
+.gridJoin,.gridJoin a {
+    color:#FFFFFF;
+}
+.gridJoin a {
+    text-decoration:underline;
+}
+.container {
+    width:70%;
+}
+.top-grid {
+    margin-top:80px;
+}
+.grid-title {
+    margin-bottom:20px;
+    height:30px;
+}
+.grid-title h3 {
+    width:150px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.grid-title a {
+    width:60px;
+    height:30px;
+    text-align:center;
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+}
+.grid-title a span {
+    display:block;
+    width:35px;
+    height:20px;
+    line-height:20px;
+    background-color:#EC005F;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+.grid-title h3,.grid-title a{
+    display:block;    
+    float:left;
+}
+.grid {
+    clear:both;
+    font-family:Arial;
+    font-size:13px;
+}
+.grid th,.grid td {
+    text-align:center;
+}
+.login-container {
+    margin-top:100px;
+}
+.login-container .row {
+    margin-top:20px;
+}
+.login-row-title {
+    margin-bottom:20px;
+}

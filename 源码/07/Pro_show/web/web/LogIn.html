@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>登录页</title>
+    <meta charset="utf-8" />
+    <!--引用js文件-->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/PublicMethod.js"></script>
+    <!--引用css文件-->
+    <link href="css/css.css" rel="stylesheet" />
+    <script>
+        //点击注册按钮
+        function Regist() {
+            //打开登录
+            window.parent.EjectIdent('Register.html', '', 500, 500);
+            //获取弹出窗体
+            var close = $('#CloseCover', parent.document);
+            //移除背景透明窗体
+            $('#coverDiv', parent.document).remove();
+            //移除弹出窗体
+            $(close).parent().parent().remove();
+        }
+        //点击登录按钮
+        function OnLogin() {
+            //获取用户名
+            var UserName = $('#UserNameText').val();
+            //获取密码
+            var pwd = $('#pwdText').val();
+            //获取验证码
+            var code = $('#codeText').val();
+            //设置向后台传送的数据
+            var pd = { "t": "2", "UserName": UserName, "pwd": pwd, "code": code };
+            //传送方式post,传递地址Tools/User.ashx，从后台接受值的数据类型是json
+            $.ajax({
+                type: "post",
+                url: "Tools/User.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    //获取从后台返回的值
+                    if (data.status == "0") {
+                        //登录成功，获取url参数t
+                        var type = getQueryString('t');
+                        if (type != 0) {
+                            //父窗体跳转页面到主页
+                            window.parent.location.href = 'index.html';
+                        }
+                        else {
+                            //获取弹出窗体
+                            var close = $('#CloseCover', parent.document);
+                            //移除背景透明窗体
+                            $('#coverDiv', parent.document).remove();
+                            //移除弹出窗体
+                            $(close).parent().parent().remove();
+                        }
+                    }
+                    else {
+                        //弹出错误提示
+                        alert(data.status);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //如果数据错误，会跳到这里运行
+                }
+            });
+        }
+        //获取按键是不是回车
+        function getkey() {
+            //获取按下的键是不是回车
+            if (event.keyCode == 13) {
+                //如果是回车，执行登录方法
+                OnLogin();
+            }
+        }
+        //忘记密码
+        function respwd() {
+            //打开登录
+            window.parent.EjectIdent('ResPwd.html', '', 500, 500);
+            //获取弹出窗体
+            var close = $('#CloseCover', parent.document);
+            //移除背景透明窗体
+            $('#coverDiv', parent.document).remove();
+            //移除弹出窗体
+            $(close).parent().parent().remove();
+        }
+        //加载好页面运行方法
+        $(function () {
+            //获取url参数t
+            var type = getQueryString('t');
+            if (type == 0) {
+                //隐藏标签
+                $('#regContext').hide();
+            }
+        })
+    </script>
+</head>
+<body style="background-color:#f9f9f9;">
+    <!--注册logo-->
+    <div style="text-align:center; margin-top:50px;">
+        <img src="sysImg/logo.png" />
+    </div>
+    <!--一条横线-->
+    <hr style="height:1px; border:none; border-top:1px solid #eeeeee" />
+    <div style="width:260px; margin-left:auto; margin-right:auto; margin-top:15px;">
+        <!--用户名输入框-->
+        <input id="UserNameText" type="text" autofocus="autofocus" placeholder="请输入手机号或者邮箱" onkeypress="getkey()" style="width:260px; height:30px; font-size:14px; " /><br />
+        <!--密码输入框-->
+        <input id="pwdText" type="password" placeholder="请输入密码" onkeypress="getkey()" style="margin-top:10px; width:260px; height:30px; font-size:14px;" /><br />
+        <!--验证码输入框-->
+        <input id="codeText" type="text" onkeypress="getkey()" placeholder="请输入验证码" style="margin-top:10px; width:150px; height:30px; font-size:14px;" />
+        <!--验证码显示图片，点击显示新的验证码图片-->
+        <img alt="看不清楚，换一张" style="float:right; margin-top:10px; height:35px; width:85px;  cursor:pointer;" src="Code.ashx" onclick="this.src='Code.ashx?abc='+Math.random()" /><br />
+        <!--登录按钮-->
+        <input type="button" value="登录" onclick="OnLogin()" style="width:265px; margin-top:20px; height:30px; background-color:#f39800; border:none; color:white;  cursor:pointer;" />
+        <div id="regContext" style="margin-top:9px; font-size:13px; font-weight:600;">
+            <!--显示文字-->
+            <font style="color:rgb(170, 170, 170); ">还没账号？</font>
+            <!--点击进行注册-->
+            <font style="color:#f39800;  cursor:pointer;" onclick="Regist()">点击注册>></font>
+            <!--如果想找回密码，点击这里-->
+            <font style="color:#f39800; float:right; cursor:pointer; " onclick="respwd()">忘记密码？</font>
+        </div>
+        <div style="color:#f39800; margin:20px auto 0px auto; width:190px; font-size:13px;">
+            <!--一条横线-->
+            <hr style="height:1px; border:none; border-top:1px solid #eeeeee; width:50px; float:left; " />
+            <!--一段文字-->
+            <font style="float:left;">第三方登录</font>
+            <!--一条横线-->
+            <hr style="height:1px; border:none; border-top:1px solid #eeeeee; width:50px; float:left;" />
+        </div>
+        <div style="clear:both; width:50px;  margin:0px auto; padding-top:20px;">
+            <!--显示一个图片-->
+            <img src="sysImg/微信.png" style="width:30px; height:30px; cursor:pointer;" /><br />
+        </div>
+        <div style="clear:both; width:75px;  margin:0px auto; font-size:13px; font-weight:800;">
+            <!--显示一段文字-->
+            <font style="color:rgb(183, 183, 183); width:90px; cursor:pointer;">微信登录</font>
+        </div>
+    </div>
+    <!--一条横线-->
+    <hr style="height:1px; border:none; border-top:1px solid #eeeeee; margin-top:110px;" />
+    <!--一段文字-->
+    <div style="float:right; color:rgb(128, 128, 128); font-size:12px">为了获得更好的使用，建议使用谷歌浏览器(chrome)</div>
+</body>
+</html>

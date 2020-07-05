@@ -1,0 +1,52 @@
+﻿.login p span input{
+    border:1px;
+    border-style:solid;
+    border-color:#ED72A4;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background-color:#fff;
+    width:200px;
+    height:30px;
+    color:#424141;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;    
+    padding:5px 10px;
+}
+.login p > input[type=submit] {
+    border:0px;    
+    background-color:#d8d8d8;
+    color:#7a1e1e;
+    width:70px;
+    height:28px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+.login p.login-pwd,.login p.login-btn {
+    margin-top:10px;
+}
+.login p span {
+    margin-top:5px;
+}
+.login p span:nth-child(2) {
+    margin-left:5px;
+}
+.login p>a {
+    color:white;
+    font-size:13px;
+}
+.login p.login-btn > label {
+    font-size:13px;
+}
+div .loginInfo p{
+    color:white;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:14px;
+}
+div .loginInfo p a {
+     font-size:13px;
+     text-decoration:underline;
+}

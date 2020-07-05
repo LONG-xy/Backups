@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            var url = location.search;
+            var codeid = decodeURI(url.split('&')[0].replace("?codeid=", ""));
+            var gid = decodeURI(url.split('&')[1].replace("gid=", ""));
+
+            var pd = { "t": "11", "codeid": codeid, "groupid": gid };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        $('#codeText').val(data.status);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        });
+        function update()
+        {
+            var msg = $('#codeText').val();
+            var url = location.search;
+            var codeid = decodeURI(url.split('&')[0].replace("?codeid=", ""));
+            var gid = decodeURI(url.split('&')[1].replace("gid=", ""));
+            var pd = { "t": "12", "codeid": codeid, "groupid": gid, "msg": msg };
+            
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var userDes = $('#msg_' + codeid, parent.document);
+                        userDes.html(msg);
+                        //关闭本窗体
+                        var close = $('#CloseCover', parent.document);
+                        $('#coverDiv', parent.document).remove();
+                        $(close).parent().parent().remove();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="margin-top:80px; margin-left:20px;">类型名称：<input id="codeText" type="text" /></div>
+    <input type="button" value="修改" style="margin-top:80px; margin-left:80px;" onclick="update()" />
+</body>
+</html>

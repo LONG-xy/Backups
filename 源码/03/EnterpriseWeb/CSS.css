@@ -1,0 +1,75 @@
+.wenzi {
+	font-family: "宋体";
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	color:#FFFFFF;
+}
+.wenzi2 {
+    font-family:"宋体";
+	font-size:12px;
+	color:#000000;
+}
+.wenzi3 {
+    font-family:"宋体";
+	font-size:14px;
+	font-weight:16px;
+	color:#333333;
+}
+.daohanglianjie:link {
+    font-family:"宋体";
+	font-size:12px;
+	line-height:16px;
+	color:#4C4C4C;
+	text-decoration:none;
+}
+.daohanglianjie:visited {
+    font-family:"宋体";
+	font-size:12px;
+	line-height:16px;
+	color:#4C4C4C;
+	text-decoration:none;
+}
+.daohanglianjie:hover {
+    font-family:"宋体";
+	font-size:12px;
+	line-height:16px;
+	color:#FF0000;
+	text-decoration:none;
+}
+.daohanglianjie:active {
+    font-family:"宋体";
+	font-size:12px;
+	line-height:16px;
+	color:#FF0000;
+	text-decoration:none;
+}
+.daohanglianjie2:link {
+    font-family:"宋体";
+	font-size:13px;
+	line-height:16px;
+	color:#FFFFFF
+	text-decoration:none;
+}
+.daohanglianjie2:visited {
+    font-family:"宋体";
+	font-size:13px;
+	line-height:16px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+.daohanglianjie2:hover {
+    font-family:"宋体";
+	font-size:13px;
+	line-height:16px;
+	color:#FF0000;
+	text-decoration:none;
+}
+.daohanglianjie2:active {
+    font-family:"宋体";
+	font-size:13px;
+	line-height:16px;
+	color:#FF0000;
+	text-decoration:none;
+}

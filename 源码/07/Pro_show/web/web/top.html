@@ -1,0 +1,334 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--引入js文件-->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/Exect.js"></script>
+    <style>
+        /*设置所有标签的样式*/
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: "Comic Sans MS","微软雅黑",sans-serif;
+        }
+        /*设置id为ToprightSection的样式*/
+        #ToprightSection {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 60px;
+            color: #666666;
+        }
+
+        .mouseHove {
+            color: #fff;
+        }
+            /*设置鼠标经过的样式*/
+            .mouseHove:hover {
+                color: #f39800;
+            }
+    </style>
+    <script>
+        $(function () {
+            //初始化检索
+            $('#serachText').val(getCookie('serachStr'));
+            //设置浏览器缓存
+            setCookie('serachStr', '');
+            //如果查询内容不为空
+            if ($('#serachText').val() != '') {
+                //设置查询内容
+                window.parent.SerachStr = $('#serachText').val();
+                //运行父窗体的GetContext方法
+                window.parent.GetContext();
+            }
+            //初始化登录信息
+            var pd = { "t": "1" };
+            $.ajax({
+                type: "post",
+                url: "Tools/User.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    //后台返回的是否是-1
+                    if (data.status == "-1") {
+                        //隐藏标签
+                        $('#createBtn').hide();
+                        //显示标签
+                        $('#loginBtn').show();
+                        //显示标签
+                        $('#freeModel').show();
+                        //显示标签
+                        $('#regionBtn').show();
+                        //隐藏标签
+                        $('#out').hide();
+                        //隐藏标签
+                        $('#headImg').hide();
+                        //隐藏标签
+                        $('#headDiv').hide();
+                        //隐藏标签
+                        $('#headXf').hide();
+                        //显示标签
+                        $('#sx').show();
+                    }
+                    else {
+                        $('#loginBtn').remove();
+                        //显示标签
+                        $('#createBtn').show();
+                        //显示标签
+                        $('#freeModel').show();
+                        //移除标签
+                        $('#regionBtn').remove();
+                        //显示标签
+                        $('#out').show();
+                        //显示标签
+                        $('#headImg').show();
+                        //显示标签
+                        $('#headDiv').show();
+                        //显示标签
+                        $('#headXf').show();
+                        //移除标签
+                        $('#sx').remove();
+                        //获取头像
+                        GetImgHead();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        });
+        //设置coke
+        function setCookie(name, value) {
+            //设置有效时间
+            var Days = 30;
+            var exp = new Date();
+            //设置时间
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+            //设置cookie
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        }
+        //获取coke
+        function getCookie(name) {
+            //获取cookie
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+        //查询模板
+        function Serach() {
+            //获取查询内容
+            var serachStr = $('#serachText').val();
+            if ($(window.parent.document).find('#ContentDiv').length == 1) {
+                //证明这个是在有模板搜索的窗体的
+                //存入到coke中
+                setCookie('serachStr', serachStr);
+                //设置父窗体查询内容
+                window.parent.SerachStr = $('#serachText').val();
+                //执行父窗体方法
+                window.parent.serach();
+            }
+            else {
+                //父窗体跳转页面
+                window.parent.document.location.href = "index.html";
+            }
+        }
+        //跳转到主页
+        function Rehref() {
+            //父窗体跳转页面
+            window.parent.document.location.href = "index.html";
+        }
+        //我的作品
+        function Myprogect() {
+            //检查是否登录
+            var pd = { "t": "1" };
+            $.ajax({
+                type: "post",
+                url: "Tools/User.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "-1") {
+                        //登录方法
+                        ClickLogin();
+                    }
+                    else {
+                        //父窗体跳转页面
+                        window.parent.document.location.href = "MyWorks.html";
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //点击登录
+        function ClickLogin() {
+            //弹出登录页面
+            Eject('LogIn.html', '欢迎光临，登录系统!', 500, 500);
+        }
+        //点击注册
+        function Clickregion() {
+            //弹出注册页面
+            Eject('Register.html', '欢迎光临，注册系统!', 500, 500);
+        }
+        //点击创作
+        function ClickCreate() {
+            var pd = { "t": "1" };
+            $.ajax({
+                type: "post",
+                url: "Tools/User.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "-1") {
+                        //弹出登录页面
+                        ClickLogin();
+                    }
+                    else {
+                        //父窗体跳转页面
+                        window.parent.document.location.href = "SelectTemp.html";
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //退出
+        function out() {
+            //跳转页面
+            window.location.href = "out.html";
+        }
+        //获取头像
+        function GetImgHead() {
+            var pd = { "t": "6" };
+            $.ajax({
+                type: "post",
+                url: "Tools/User.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "") {
+                        //设置属性
+                        $("#headImg").attr("src", data.status);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        function userCenter() {
+            //跳转页面
+            window.location.href = "UserCenter.html";
+        }
+        function getkey() {
+            if (event.keyCode == 13) {
+                //执行查询方法
+                Serach();
+            }
+        }
+        function gohome() {
+            //父窗体跳转页面
+            window.parent.location.href = "index.html";
+        }
+    </script>
+    <style>
+        /*动画设置*/
+        @keyframes topAnim {
+            0% {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+
+            50% {
+                position: absolute;
+                top: 0px;
+                left: 50px;
+            }
+
+            100% {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+        }
+        /*默认样式*/
+        #serachText::-webkit-input-placeholder {
+            color: white;
+            font-size: 15px;
+            line-height: 17px;
+        }
+        /*头部样式*/
+        #headDiv {
+            width: 100px;
+            height: 40px;
+            float: right;
+            margin-right: 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: all 0.4s;
+            overflow: hidden;
+            text-overflow: clip;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            line-height: 31px;
+        }
+        /*鼠标经过头部样式*/
+            #headDiv:hover {
+                height: 150px;
+                background-position-x: 10px;
+            }
+            /*字体颜色*/
+        .fontcolor {
+            margin: 0px auto;
+            color: white;
+            cursor: pointer;
+        }
+        /*鼠标经过*/
+            .fontcolor:hover {
+                color: #f39800;
+            }
+    </style>
+</head>
+
+<body>
+    <!--整体布局-->
+    <section id="webtop" style="background-color:rgba(0,0,0,.5); width:100%; height:60px; min-width:1000px;  ">
+        <!--网站logo-->
+        <section id="logo" style="float:left; font-weight:900; color:#4D4D4D; text-shadow:5px 2px 15px; font-size:38px; line-height:60px; margin-left:5%;">
+            <img src="sysImg/logo.png" onclick="gohome()" style="cursor:pointer;" />
+        </section>
+        <!--查询内容-->
+        <section style="float:left; margin-left:15%; position:relative;">
+            <img src="sysImg/图片1.png" onclick="Serach()" style="width:25px; height:25px; position:absolute; left:453px; top:15px; cursor:pointer;">
+            <input id="serachText" onkeypress="getkey()" type="text" style="border:1px solid #fff; border-radius:20px; background-color:rgba(255,255,255,.2); border-width:1px; height:40px; width:430px; margin-top:8px; padding-left:10px; padding-right:50px; color:white;" placeholder="请输入标题模板关键字" maxlength="21" />
+        </section>
+        <section id="ToprightSection" style="float:right; width:410px;">
+            <!--显示免费模板-->
+            <p class="mouseHove" id="freeModel" style="float:left; cursor:pointer; " onclick="Rehref()">免费模板</p>
+            <!--显示我的作品-->
+            <p class="mouseHove" style="float:left; margin-left:30px; cursor:pointer;  " onclick="Myprogect()">我的作品</p>
+            <!--创作按钮-->
+            <input id="createBtn" type="button" value="创作" onclick="ClickCreate()" style="float:left; display:none; margin-left:20px; width:80px; height:30px; margin-top:15px;  color:#fff; background-color:rgb(255, 134, 72); border:none;" />
+            <!--登录按钮-->
+            <font id="loginBtn" class="mouseHove" style="float:left; margin-left:50px; line-height:30px; width:50px; height:30px; margin-top:15px; border:none;  cursor:pointer; color:#f39800" onclick="ClickLogin()">登录</font>
+            <!--分割-->
+            <font id="sx" style="color:white; float:left; ">|</font>
+            <!--注册按钮-->
+            <font id="regionBtn" class="mouseHove" style="float:left; line-height:30px; width:50px; height:30px; margin-top:15px; margin-left:20px; cursor:pointer" onclick="Clickregion()">注册</font>
+            <!--登录信息-->
+            <div id="headDiv" style="display:none;">
+                <img id="headImg" src="userHead/t.jpg" width="40" height="40" style="border-radius:40px; " /><br />
+                <div id="mylist" style="background-color:rgba(0,0,0,.5); border:none; border-radius:0px 0px 5px 5px; margin-top:1px;">
+                    <font class="fontcolor">我的消息</font><br />
+                    <font class="fontcolor" onclick="userCenter()">个人信息</font><br />
+                    <font id="out" class="fontcolor" onclick="out()">退出</font>
+                </div>
+            </div>
+            <!---鼠标经过显示动画下拉-->
+        </section>
+    </section>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../css/css.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/PublicMethod.js"></script>
+    <script>
+        $(function () { SelectCj() });
+        function SetModel()
+        {
+            var url = location.search;
+            var a = decodeURI(url.split('&')[0].replace("?t=", ""));
+            if (confirm("是否生成网站模板？编辑了吗？")) {
+                var sence = $('#sence').val();
+                var pd = { "t": "7", "code": a, "sence": sence };
+                $.ajax({
+                    type: "post",
+                    url: "tools/Sence.ashx",
+                    data: pd,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status != "-1") {
+                            //关闭本窗体
+                            var close = $('#CloseCover', parent.document);
+                            $('#coverDiv', parent.document).remove();
+                            $(close).parent().parent().remove();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                });
+            }
+        }
+        //查询场景
+        function SelectCj() {
+            var pd = { "t": "1", "Gid": "3" };
+            $.ajax({
+                type: "post",
+                url: "../Tools/Code.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.msg;//显示文本
+                            var values = item.code_id;//值
+                            $('#sence').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="margin-top:60px; margin-left:60px;">所属场景：<select id="sence"></select></div>
+    <div style="width:80px; margin:80px auto;"><input type="button" value="生成模板" onclick="SetModel()"/></div>
+</body>
+</html>

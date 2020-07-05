@@ -1,0 +1,148 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register Src="webUser/Top.ascx" TagName="Top" TagPrefix="uc1" %>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>    
+	<meta charset="utf-8">
+	<meta name="description" content="Free Responsive Html5 Css3 Templates | zerotheme.com">
+	<meta name="author" content="www.zerotheme.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/public.css" rel="stylesheet" />
+  	<link rel="stylesheet" href="css/zerogrid.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+    	
+	<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+		<script src="js/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script src="js/css3-mediaqueries.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="wrap-body">
+        <uc1:Top ID="Top2" runat="server" />
+        <section id="container">
+	        <div class="wrap-container zerogrid">
+		        <div id="main-content" class="col-2-3">
+			        <div class="wrap-content">
+                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+		        </div>
+                <div id="sidebar" class="col-1-3">
+			        <div class="wrap-sidebar">
+				        <!---- Start Widget ---->
+                        <div class="widget wid-tag">
+					        <div class="wid-header">
+						        <h5>登录</h5>
+					        </div>
+					        <div class="wid-content">
+                                <%if (Session["userName"] != null)
+                                {%>
+                                    <%=Session["userName"].ToString() %> 欢迎您登录！
+                                    【<asp:LinkButton ID="LinkBtnLogout" CssClass="chengse" runat="server" OnClick="LinkBtnLogout_Click">注销</asp:LinkButton>】
+                                <%}
+                                else
+                                {%>
+                                    <p class="login-p"><span>用户名：</span><span><asp:TextBox ID="txtUserName" runat="server" Width="200px" Height="36px"></asp:TextBox></span></p>
+                                    <p class="login-p"><span>密&nbsp;&nbsp;&nbsp;码：</span><span><asp:TextBox ID="txtUserPass" runat="server" Width="200px" Height="36px" TextMode="Password"></asp:TextBox></span></p>
+                                    <p class="login-p">
+                                        <span>
+                                            <asp:Button ID="Button1" runat="server" Text="登录" OnClick="imgBtnEntry_Click" Width="100" Height="40"/>&nbsp;&nbsp;
+                                            <asp:LinkButton ID="linkBtnGetPass" runat="server" PostBackUrl="~/GetPass.aspx?active=9">忘记密码?</asp:LinkButton>
+                                            <asp:LinkButton ID="linkBtnRegister" runat="server" PostBackUrl="~/Register.aspx?active=9">用户注册</asp:LinkButton>
+                                        </span>
+                                    </p>
+                                <%}%>
+					        </div>
+				        </div>
+				        <div class="widget wid-new-updates">
+					        <div class="wid-header">
+						        <h5>站内公告!</h5>
+					        </div>
+					        <div class="wid-content">
+						        <marquee direction="up" scrollamount="3">
+                                    <div><span><%=title %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=issuanceDate%></span></div>
+                                    <div><%=content %></div>
+                                </marquee> 
+					        </div>
+				        </div>
+				        <!---- Start Widget ---->
+                         <div>				       
+                            <p><img src="../images/line.gif" width="174" height="360" border="0" usemap="#Map2" /></p>
+                            <p><img src="../images/bbanner.jpg" width="174" height="450" border="0" usemap="#Map2" /></p>                      
+				        </div>
+			        </div>
+		        </div>
+	        </div>
+        </section>
+        <footer>
+	        <div class="zerogrid">
+		        <div class="wrap-footer">
+			        <div class="row">				        
+				        <div class="col-1-2">
+					        <div class="wrap-col">
+						        <div class="widget wid-meta">
+							        <div class="wid-header">
+								        <h5>链接</h5>
+							        </div>
+							        <div class="widget-content">
+								        <div class="row">
+									        <ul>
+										        <li><a href="#">> 明日主站 </a></li>
+										        <li><a href="#">> 明日图书 </a></li>
+										        <li><a href="#">> 明日软件</a></li>
+										        <li><a href="#">> 明日编程词典网</a></li>
+										        <li><a href="#">> 明日论坛  </a></li>
+										        <li><a href="#">> 招贤纳士</a></li>
+                                                <li><a href="../manage/manage_login.aspx">> 进入后台</a></li>
+									        </ul>
+								        </div>
+							        </div>
+						        </div>
+					        </div>
+				        </div>
+				        <div class="col-1-2">
+					        <div class="wrap-col">
+						        <div class="widget wid-report">
+							        <div class="wid-header">
+								        <h5>联系我们</h5>
+							        </div>
+							        <div class="wid-content">
+								        <p>技术服务热线：0431-84978981 84978982</p>
+							        </div>
+						        </div>
+					        </div>
+				        </div>
+			        </div>
+		        </div>
+	        </div>
+	        <div class="bottom-footer">
+		        <div class="wrap-bottom ">
+			        <div class="copyright">
+				        <p>Copyright©www.mingrisoft.com All Rights Reserved!</p>
+			        </div>
+		        </div>
+	        </div>
+        </footer>
+    </div>
+    </form>
+</body>
+</html>

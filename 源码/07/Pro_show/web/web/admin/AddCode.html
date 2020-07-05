@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            SelectType();
+        });
+        //查询类型
+        function SelectType() {
+            var pd = { "t": "7" };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.group_msg;//显示文本
+                            var values = item.group_id;//值
+                            $('#serachModels').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        function addCode()
+        {
+            var serachModels = $('#serachModels').val();
+            var msg = $('#codeText').val();
+            var pd = { "t": "13", "groupid": serachModels, "msg": msg };
+            $.ajax({
+                type: "post",
+                url: "tools/user.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        window.parent.GetUserList();
+                        //关闭本窗体
+                        var close = $('#CloseCover', parent.document);
+                        $('#coverDiv', parent.document).remove();
+                        $(close).parent().parent().remove();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="float:left;margin-left:20px;">
+        基本类型：<select id="serachModels">
+        </select>
+    </div>
+    <div style="margin-top:80px; margin-left:20px;">类型名称：<input id="codeText" type="text" /></div>
+    <div>
+        <input type="button" value="添加" onclick="addCode()" />
+    </div>
+</body>
+</html>

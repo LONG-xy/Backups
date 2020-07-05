@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="js/page.js"></script>
+    <link href="css/adminCss.css" rel="stylesheet" />
+    <style>
+        .div div {
+            width: 120px;
+        }
+    </style>
+    <script>
+        $(function () {
+            GetUserList();
+            SelectType();
+            SelectCj();
+        });
+        //获取场景列表
+        function GetUserList() {
+            var modelName = $('#serachSenceName').val();
+            var modelCode = $('#serachCode').val();
+            var modelStatus = $('#serachStatus').val();
+            var modelHy = $('#serachhy').val();
+            var modelCj = $('#serachcj').val();
+
+            var pd = { "t": "10", "modelName": modelName, "modelCode": modelCode, "modelStatus": modelStatus, "modelHy": modelHy, "modelCj": modelCj, "pageNum": pageNum, "RowCount": RowCount };
+            $.ajax({
+                type: "post",
+                url: "tools/Sence.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        var html = ' <div>作者</div><div>模板编号</div><div>模板名称</div><div>创作时间</div><div>场景类型</div><div>行业类型</div><div style="width:50px;">点击率</div><div>状态</div><div style="width:195px;">操作</div>';
+                        $.each(dataobj.root, function (i, item) {
+                            var time = new Date(item.addtime).getFullYear() + "-" + (new Date(item.addtime).getMonth() + 1) + "-" + new Date(item.addtime).getDate();
+                            html += '<div id="id_' + item.temp_code + '" style="width:100%;background-color:#e9eaeb;"><div>' + item.user_name + '</div><div>' + item.temp_code + '</div><div>' + item.temp_name + '</div><div>' + time + '</div><div>' + item.senceName + '</div><div>' + item.msg + '</div><div style="width:50px;">' + item.MouseClick + '</div><div>' + SetStatus(item.state_code_id) + '</div><div style="width:195px;"><input type="button" style="background-color:#83d195;" value="浏览"  onclick="SenceLook(\'' + item.temp_code + '\')" class="listbtn" /><input style="background-color:#e8ad49;" type="button" value="修改" onclick="update(\'' + item.temp_code + '\')" class="listbtn" /><input type="button" style="background-color:#e97777;" value="删除" onclick="DeleteTemp(\'' + item.temp_code + '\')" class="listbtn" /></div></div>';
+                        });
+                        $('#userList').html(html);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+
+            var pd2 = { "t": "11", "modelName": modelName, "modelCode": modelCode, "modelStatus": modelStatus, "modelHy": modelHy, "modelCj": modelCj };
+            GetPage(pd2, "tools/Sence.ashx");
+        }
+        //查询用户状态中文名称
+        function SetStatus(a) {
+            switch (a) {
+                case "0":
+                    return "正常";
+                    break;
+                case "1":
+                    return "异常";
+                    break;
+            }
+        }
+        //浏览场景
+        function SenceLook(a) {
+            EjectIdent('http://' + window.location.host + '/senceCreate/view.html?c=view&id=' + a + '&preview=preview', '', 320, 650);
+            $('#tdiv').css('border-radius', "50px");
+        }
+        //点击修改
+        function update(a) {
+            var pd = { "t": "11", "temp_code": a };
+            $.ajax({
+                type: "post",
+                url: '../Tools/temp.ashx',
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        window.open("../senceCreate/#/scene/create/" + data.status + "?pageId=1");
+                    }
+                    else {
+                        //打开登录
+                        window.parent.EjectIdent('LogIn.html', '欢迎光临，登录系统!', 500, 500);
+                        //关闭本窗体
+                        var close = $('#CloseCover', parent.document);
+                        $('#coverDiv', parent.document).remove();
+                        $(close).parent().parent().remove();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //查询行业
+        function SelectType() {
+            var pd = { "t": "1", "Gid": "2" };
+            $.ajax({
+                type: "post",
+                url: "../Tools/Code.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.msg;//显示文本
+                            var values = item.code_id;//值
+                            $('#serachhy').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //查询场景
+        function SelectCj() {
+            var pd = { "t": "1", "Gid": "3" };
+            $.ajax({
+                type: "post",
+                url: "../Tools/Code.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            var title = item.msg;//显示文本
+                            var values = item.code_id;//值
+                            $('#serachcj').append('<option value="' + values + '">' + title + '</option>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //删除场景
+        function DeleteTemp(a) {
+            if (confirm("是否删除场景?")) {
+                var pd = { "t": "12", "code": a };
+                $.ajax({
+                    type: "post",
+                    url: "tools/Sence.ashx",
+                    data: pd,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status != "-1") {
+                            GetUserList();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="height:60px;line-height:60px;">
+        <div style="float:left;margin-left:20px;">搜索区域：</div>
+        <div style="float:left;margin-left:20px;">模板名称：<input type="text" style="width:100px;" id="serachSenceName" /></div>
+        <div style="float:left;margin-left:20px;">模板编号：<input type="text" style="width:100px;" id="serachCode" /></div>
+        <div style="float:left;margin-left:20px;">
+            状态：<select id="serachStatus">
+                <option value="-1">全部</option>
+                <option value="0">正常</option>
+                <option value="1">异常</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;">
+            模板行业：<select id="serachhy">
+                <option value="-1">全部</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;">
+            模板场景：<select id="serachcj">
+                <option value="-1">全部</option>
+            </select>
+        </div>
+        <div style="float:left;margin-left:20px;"><input type="button" id="serachBtn" value="查 询" style="width:80px; height:30px;" onclick="GetUserList()" /></div>
+    </div>
+    <hr style="width:100%;" />
+    <!--场景列表-->
+    <div id="userList" class="div">
+
+    </div>
+    <!--分页列表-->
+    <div id="pageList" style="clear:both;width:1088px;margin-left:auto;margin-right:auto;">
+        <font id="pageUp" class="fenye" onclick="SetPageDounOrUp(true)">上一页</font>
+        <font id="orderPageUp" style="margin:10px; float:left;" onclick="OrderPage(true)">.......</font>
+        <p id="CenterPage"></p>
+        <font id="orderPageDown" style="margin:10px; float:left;" onclick="OrderPage(false)">.......</font>
+        <font id="pageDown" class="fenye" onclick="SetPageDounOrUp(false)">下一页</font>
+        <font id="PageText" style="margin:10px;float:right;cursor:pointer;font-size:10px;line-height:40px;">当前页数:第 1 页 （共180条）</font>
+    </div>
+</body>
+</html>

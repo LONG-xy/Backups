@@ -1,0 +1,14 @@
+﻿.custom-show-list {
+    margin-right:0px;
+}
+.custom-content-image {
+    margin-top:5px;
+}
+.custom-content-image img{
+    width:800px;
+    height:84px;
+}
+
+.custom-content-info1,.custom-content-info2,.custom-content-info3 {
+    margin-top:20px;
+}
